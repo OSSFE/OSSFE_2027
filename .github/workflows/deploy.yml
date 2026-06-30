@@ -15,13 +15,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-    
-      - name: Set up Node.js 22
-        uses: actions/setup-node@v4
+
+      - uses: withastro/action@v3
         with:
-          node-version: 22
-          cache: 'npm' # Options: 'npm', 'yarn', or 'pnpm'
-      - uses: withastro/action@v3   # installs deps, builds, uploads artifact
+          node-version: 22   # installs deps, builds, uploads artifact
 
   deploy:
     needs: build
