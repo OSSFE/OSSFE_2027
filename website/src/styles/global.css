@@ -2,6 +2,31 @@
 
 @import 'tailwindcss';
 
+/* archivo-regular - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Archivo';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/archivo-v25-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* archivo-600 - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Archivo';
+  font-style: normal;
+  font-weight: 600;
+  src: url('../fonts/archivo-v25-latin-600.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* archivo-700 - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Archivo';
+  font-style: normal;
+  font-weight: 700;
+  src: url('../fonts/archivo-v25-latin-700.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
 @theme {
   --color-ossfe-blue: #333F50;
   --color-ossfe-dark: #26303D;
@@ -12,15 +37,9 @@
   --color-ink-muted: #E2E8F0;
   --color-ink-faint: #94A3B8;
 
-  --font-display: 'Coolvetica', system-ui, sans-serif;
-  --font-body: 'Inter', system-ui, sans-serif;
-}
-
-@font-face {
-  font-family: 'Coolvetica';
-  src: url('/fonts/coolvetica.woff2') format('woff2');
-  font-weight: 400;
-  font-display: swap;
+  --font-display: 'Archivo', system-ui, sans-serif;
+  --font-body: 'Archivo', system-ui, sans-serif;
 }
 
 html { background-color: #333F50; }
+
