@@ -1,65 +1,28 @@
 ---
 // src/pages/sponsors.astro
-import Base from '../layouts/Base.astro';
-import Nav from '../components/Nav.astro';
-import Footer from '../components/Footer.astro';
+import Base from "../layouts/Base.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import data from "../data/sponsors.json";
 
 const base = import.meta.env.BASE_URL;
-
-// ────────────────────────────────────────────────
-//  EDIT YOUR DATA HERE  (placeholders = 2026 / projected)
-// ────────────────────────────────────────────────
-const headline = [
-  { value: '250+', label: 'Attendees in 2026' },
-  { value: '30+', label: 'Countries represented' },
-  { value: '60+', label: 'Talks, tutorials & posters' },
-  { value: '1.2k', label: 'Newsletter subscribers' },
-];
-
-const audience = [
-  { label: 'Academia', pct: 38 },
-  { label: 'National labs', pct: 27 },
-  { label: 'Industry & startups', pct: 23 },
-  { label: 'Students', pct: 12 },
-];
-
-const growth = [
-  { year: '2024', value: 90 },
-  { year: '2025', value: 160 },
-  { year: '2026', value: 250 },
-  { year: '2027', value: 350, projected: true },
-];
-
-const reach = [
-  { icon: '🌐', value: '15k', label: 'Website visits' },
-  { icon: '▶️', value: '8k', label: 'Talk recording views' },
-  { icon: '💬', value: '3k', label: 'Social followers' },
-];
-
-const tiers = [
-  { name: 'Silver', price: '$2,000', includes: null,
-    perks: ['Logo on website & sponsor banner', 'Job board listing', 'Distribute merch in attendee bags', '1 conference pass'], featured: false },
-  { name: 'Gold', price: '$5,000', includes: 'Silver',
-    perks: ['Expo booth', 'Attendee list & résumés (opt-in)', '1 scholarship in your name', '2 conference passes'], featured: true },
-  { name: 'Diamond', price: '$10,000', slots: 'only 3', includes: 'Gold',
-    perks: ['Premium logo + top billing', 'Logo on badges & lanyards', 'Offer a tutorial', '2 scholarships in your name', '3 conference passes'], featured: false },
-];
-
-const alaCarte = [
-  { item: 'Welcome reception', price: '$3,000' },
-  { item: 'Coffee / refreshment break', price: '$2,000' },
-  { item: 'Lanyards (exclusive)', price: '$4,000' },
-  { item: 'Travel-grant pool', price: 'any amount' },
-];
-
-const faqs = [
-  { q: "What's included with an expo booth?", a: 'A table, chairs, wi-fi and power in a high-traffic common area. Sponsors handle their own shipping. Available to Gold and Diamond.' },
-  { q: 'What is premium logo placement?', a: 'Preferential treatment on all logo benefits (first/centered/larger), plus your logo on attendee badges and lanyards.' },
-  { q: 'What is top billing?', a: 'Diamond sponsors are always listed first and acknowledged as “Special Thanks to our Diamond Sponsors”.' },
-  { q: 'How does the attendee list work?', a: 'A CSV (name, email, job title, company) of attendees who opt in at registration. Gold and Diamond only.' },
-  { q: 'Do sponsor talks go through review?', a: 'Diamond tutorial slots don’t go through the open CFP, but content is approved by the committee for relevance.' },
-];
-const max = Math.max(...growth.map((g) => g.value));
+const {
+  meta,
+  headline,
+  feedback,
+  feedbackResponses,
+  editions,
+  quotes,
+  tiers,
+  alaCarte,
+  prizes,
+  prizeNote,
+  faqs,
+} = data;
+const previousSponsors = data.previousSponsors as {
+  name: string;
+  logo: string;
+}[];
 ---
 
 <Base title="Sponsor OSSFE 2027">
@@ -68,16 +31,35 @@ const max = Math.max(...growth.map((g) => g.value));
   <!-- HERO -->
   <header class="bg-ossfe-blue pt-32 pb-20">
     <div class="mx-auto max-w-4xl px-6 text-center">
-      <p class="font-body text-sm uppercase tracking-widest text-accent">Sponsor Prospectus</p>
-      <h1 class="mt-3 font-display text-5xl text-ink md:text-6xl">Partner with OSSFE 2027</h1>
-      <p class="mx-auto mt-6 max-w-2xl font-body text-lg text-ink-muted">
-        OSSFE is the conference for the open-source software powering fusion energy. Sponsoring
-        connects your brand with a highly technical, hard-to-reach community — and helps sustain
-        the tools the whole field relies on.
+      <p class="font-body text-sm uppercase tracking-widest text-accent">
+        Sponsor Prospectus
       </p>
-      <div class="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-        <a href={`${base}sponsor-prospectus.pdf`} class="rounded-full bg-accent px-8 py-3 font-semibold text-ossfe-darker transition hover:bg-accent-hover">Download PDF</a>
-        <a href="mailto:sponsors@ossfe.org" class="rounded-full border border-ink/30 px-8 py-3 font-semibold text-ink transition hover:border-ink hover:bg-ink/10">sponsors@ossfe.org</a>
+      <h1 class="mt-3 font-display text-5xl text-ink md:text-6xl">
+        Partner with OSSFE 2027
+      </h1>
+      <p class="mx-auto mt-6 max-w-2xl font-body text-lg text-ink-muted">
+        OSSFE is the conference for the open-source software powering fusion
+        energy. Sponsoring connects your brand with a highly technical,
+        hard-to-reach community, and helps sustain the tools the whole field
+        relies on.
+      </p>
+      <p class="mt-3 font-body text-sm text-ink-faint">
+        {meta.location} · {meta.dates}
+      </p>
+      <p class="font-body text-xs text-ink-faint">{meta.organiser}</p>
+      <div
+        class="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
+      >
+        <a
+          href={`${base}${meta.pdf}`}
+          class="rounded-full bg-accent px-8 py-3 font-semibold text-ossfe-darker transition hover:bg-accent-hover"
+          >Download PDF</a
+        >
+        <a
+          href={`mailto:${meta.contact}`}
+          class="rounded-full border border-ink/30 px-8 py-3 font-semibold text-ink transition hover:border-ink hover:bg-ink/10"
+          >{meta.contact}</a
+        >
       </div>
     </div>
   </header>
@@ -85,12 +67,16 @@ const max = Math.max(...growth.map((g) => g.value));
   <!-- HEADLINE STATS -->
   <section class="bg-ossfe-dark py-16">
     <div class="mx-auto grid max-w-5xl grid-cols-2 gap-8 px-6 md:grid-cols-4">
-      {headline.map((s) => (
-        <div class="text-center">
-          <div class="font-display text-4xl text-accent md:text-5xl">{s.value}</div>
-          <div class="mt-2 font-body text-sm text-ink-faint">{s.label}</div>
-        </div>
-      ))}
+      {
+        headline.map((s) => (
+          <div class="text-center">
+            <div class="font-display text-4xl text-accent md:text-5xl">
+              {s.value}
+            </div>
+            <div class="mt-2 font-body text-sm text-ink-faint">{s.label}</div>
+          </div>
+        ))
+      }
     </div>
   </section>
 
@@ -98,114 +84,262 @@ const max = Math.max(...growth.map((g) => g.value));
   <section class="bg-ossfe-blue py-20">
     <div class="mx-auto max-w-6xl px-6">
       <h2 class="text-center font-display text-4xl text-ink">Why sponsor?</h2>
-      <div class="mt-12 grid gap-6 md:grid-cols-3">
-        {[
-          { icon: '🎯', t: 'Reach a niche audience', b: 'Direct access to fusion software engineers, scientists and decision-makers you can’t easily reach elsewhere.' },
-          { icon: '🧲', t: 'Find rare talent', b: 'Meet and recruit specialists at the intersection of fusion, scientific computing and open source.' },
-          { icon: '🌱', t: 'Make real impact', b: 'Your support funds travel grants, scholarships and the open-source tools the community depends on.' },
-        ].map((c) => (
-          <div class="rounded-2xl bg-ossfe-dark/60 p-8 ring-1 ring-white/5">
-            <div class="text-3xl">{c.icon}</div>
-            <h3 class="mt-4 font-display text-xl text-ink">{c.t}</h3>
-            <p class="mt-2 font-body text-sm text-ink-faint">{c.b}</p>
-          </div>
-        ))}
+      <div class="mt-12 grid items-stretch gap-6 md:grid-cols-3">
+        {
+          [
+            {
+              icon: "🎯",
+              t: "Reach a niche audience",
+              b: "Direct access to fusion software engineers, scientists and decision-makers you can’t easily reach elsewhere.",
+            },
+            {
+              icon: "🧲",
+              t: "Find rare talent",
+              b: "Meet and recruit specialists at the intersection of fusion, scientific computing and open source.",
+            },
+            {
+              icon: "🌱",
+              t: "Make real impact",
+              b: "Your support funds travel grants, scholarships and the open-source tools the community depends on.",
+            },
+          ].map((c) => (
+            <div class="flex h-full flex-col rounded-2xl bg-ossfe-dark/60 p-8 ring-1 ring-white/5">
+              <div class="text-3xl">{c.icon}</div>
+              <h3 class="mt-4 font-display text-xl text-ink">{c.t}</h3>
+              <p class="mt-2 font-body text-sm text-ink-faint">{c.b}</p>
+            </div>
+          ))
+        }
       </div>
     </div>
   </section>
 
-  <!-- DATA: AUDIENCE + GROWTH -->
+  <!-- PROOF: FEEDBACK STATS -->
   <section class="bg-ossfe-dark py-20">
-    <div class="mx-auto grid max-w-6xl gap-16 px-6 md:grid-cols-2">
+    <div class="mx-auto max-w-6xl px-6">
+      <h2 class="text-center font-display text-4xl text-ink">
+        The 2026 edition, by the numbers
+      </h2>
+      <p class="mt-3 text-center font-body text-ink-faint">
+        From the post-event feedback survey ({feedbackResponses} respondents)
+      </p>
+      <div class="mt-12 grid grid-cols-2 gap-6 md:grid-cols-3">
+        {
+          feedback.map((s) => (
+            <div class="flex min-h-[9rem] flex-col items-center justify-center rounded-2xl bg-ossfe-blue/50 p-6 text-center ring-1 ring-white/5">
+              {s.rating ? (
+                <div
+                  class="relative inline-block font-body text-3xl leading-none tracking-widest"
+                  aria-label={`${s.rating} out of 5`}
+                >
+                  <div class="text-white/25">★★★★★</div>
+                  <div
+                    class="absolute inset-0 overflow-hidden whitespace-nowrap text-accent"
+                    style={`width:${(s.rating / 5) * 100}%`}
+                  >
+                    ★★★★★
+                  </div>
+                </div>
+              ) : (
+                <div class="font-display text-4xl text-accent">{s.value}</div>
+              )}
+              <div class="mt-3 font-body text-sm text-ink-faint">
+                {s.label}
+                {s.rating ? ` (${s.value})` : ""}
+              </div>
+            </div>
+          ))
+        }
+      </div>
 
-      <!-- Audience breakdown (horizontal bars) -->
+      <!-- Pull quotes -->
+      <div class="mt-14 grid items-stretch gap-6 md:grid-cols-2">
+        {
+          quotes.map((q) => (
+            <figure class="flex h-full flex-col rounded-2xl bg-ossfe-blue/40 p-6 ring-1 ring-white/5">
+              <blockquote class="font-body text-ink-muted">
+                “{q.text}”
+              </blockquote>
+              <figcaption class="mt-3 font-body text-xs uppercase tracking-wide text-ink-faint">
+                {q.source}
+              </figcaption>
+            </figure>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- DATA: WHO ATTENDS (treemap) + POPULAR TOPICS (bar) -->
+  <section class="bg-ossfe-blue py-20">
+    <div class="mx-auto grid max-w-6xl gap-16 px-6 md:grid-cols-2">
       <div>
         <h3 class="font-display text-2xl text-ink">Who attends</h3>
-        <p class="mt-2 font-body text-sm text-ink-faint">2026 audience breakdown</p>
-        <div class="mt-8 space-y-5">
-          {audience.map((a) => (
-            <div>
-              <div class="flex justify-between font-body text-sm text-ink-muted">
-                <span>{a.label}</span><span class="text-accent">{a.pct}%</span>
-              </div>
-              <div class="mt-2 h-3 w-full overflow-hidden rounded-full bg-white/10">
-                <div class="h-full rounded-full bg-accent" style={`width:${a.pct}%`}></div>
-              </div>
-            </div>
-          ))}
-        </div>
+        <p class="mt-2 font-body text-sm text-ink-faint">
+          Participants by institution type (2026 in-person edition)
+        </p>
+        <div class="mt-6 h-72"><canvas id="audienceChart"></canvas></div>
       </div>
-
-      <!-- Growth (vertical bars) -->
       <div>
-        <h3 class="font-display text-2xl text-ink">Growing fast</h3>
-        <p class="mt-2 font-body text-sm text-ink-faint">Attendance by year (2027 projected)</p>
-        <div class="mt-8 flex h-56 items-end justify-between gap-4">
-          {growth.map((g) => (
-            <div class="flex flex-1 flex-col items-center justify-end">
-              <span class="mb-2 font-body text-sm text-ink-muted">{g.value}</span>
-              <div
-                class={`w-full rounded-t-lg ${g.projected ? 'bg-accent/40 ring-1 ring-accent ring-dashed' : 'bg-accent'}`}
-                style={`height:${(g.value / max) * 100}%`}>
-              </div>
-              <span class="mt-2 font-body text-xs text-ink-faint">{g.year}</span>
-            </div>
-          ))}
-        </div>
+        <h3 class="font-display text-2xl text-ink">What they came for</h3>
+        <p class="mt-2 font-body text-sm text-ink-faint">
+          Top topics submitted for the 2026 programme
+        </p>
+        <div class="mt-6 h-72"><canvas id="topicsChart"></canvas></div>
       </div>
     </div>
 
-    <!-- Online reach strip -->
-    <div class="mx-auto mt-16 grid max-w-4xl grid-cols-3 gap-6 px-6">
-      {reach.map((r) => (
-        <div class="rounded-2xl bg-ossfe-blue/60 p-6 text-center ring-1 ring-white/5">
-          <div class="text-2xl">{r.icon}</div>
-          <div class="mt-2 font-display text-3xl text-ink">{r.value}</div>
-          <div class="font-body text-xs text-ink-faint">{r.label}</div>
-        </div>
-      ))}
+    <!-- Editions / track record -->
+    <div
+      class="mx-auto mt-16 grid max-w-5xl items-stretch gap-6 px-6 sm:grid-cols-3"
+    >
+      {
+        editions.map((e) => (
+          <div
+            class={`flex h-full min-h-[10rem] flex-col rounded-2xl p-6 text-center ring-1 ${e.highlight ? "bg-accent/10 ring-accent/40" : "bg-ossfe-dark/50 ring-white/10"}`}
+          >
+            <div class="font-display text-3xl text-ink">{e.year}</div>
+            <div
+              class={`mt-1 font-body text-xs uppercase tracking-widest ${e.highlight ? "text-accent" : "text-ink-faint"}`}
+            >
+              {e.format}
+            </div>
+            <div class="mt-3 flex flex-1 items-center justify-center font-body text-sm text-ink-muted">
+              {e.stat}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    <!-- Where attendees come from (bubble map) -->
+    <div class="mx-auto mt-16 max-w-6xl px-6">
+      <h3 class="font-display text-2xl text-ink">Where attendees come from</h3>
+      <p class="mt-2 font-body text-sm text-ink-faint">
+        Home countries of attendees across the 2025 and 2026 editions. Click a year in the legend to toggle it.
+      </p>
+      <div class="mt-6 h-[26rem]"><canvas id="countriesMap"></canvas></div>
     </div>
   </section>
+
+  {
+    previousSponsors.length > 0 && (
+      <section class="bg-ossfe-dark py-16">
+        <div class="mx-auto max-w-5xl px-6 text-center">
+          <h2 class="font-display text-3xl text-ink">
+            Previously sponsored by
+          </h2>
+          <div class="mt-10 flex flex-wrap items-center justify-center gap-x-12 gap-y-8">
+            {previousSponsors.map((s) => (
+              <img
+                src={`${base}${s.logo}`}
+                alt={s.name}
+                class="h-10 opacity-80 brightness-0 invert grayscale transition hover:opacity-100 hover:brightness-100 hover:invert-0 hover:grayscale-0"
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
 
   <!-- TIERS -->
   <section class="bg-ossfe-blue py-20">
     <div class="mx-auto max-w-6xl px-6">
-      <h2 class="text-center font-display text-4xl text-ink">Sponsorship tiers</h2>
-      <p class="mt-3 text-center font-body text-ink-faint">All amounts in USD. Each tier builds on the one below.</p>
-      <div class="mt-12 grid gap-6 md:grid-cols-3">
-        {tiers.map((t) => (
-          <div class={`relative flex flex-col rounded-2xl p-8 ring-1 transition
-            ${t.featured ? 'bg-ossfe-dark ring-accent/60 md:-translate-y-2' : 'bg-ossfe-dark/50 ring-white/10'}`}>
-            {t.featured && (
-              <span class="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-accent px-4 py-1 text-xs font-semibold text-ossfe-darker">Most popular</span>
-            )}
-            <h3 class="font-display text-2xl text-ink">{t.name}</h3>
-            <div class="mt-2 flex items-baseline gap-2">
-              <span class="font-display text-3xl text-ink">{t.price}</span>
-              {t.slots && <span class="font-body text-xs text-accent">{t.slots}</span>}
+      <h2 class="text-center font-display text-4xl text-ink">
+        Sponsorship tiers
+      </h2>
+      <p class="mt-3 text-center font-body text-ink-faint">
+        All amounts in {meta.currency}. Each tier builds on the one below.
+      </p>
+      <div class="mt-12 grid items-stretch gap-6 md:grid-cols-3">
+        {
+          tiers.map((t) => (
+            <div
+              class={`relative flex h-full flex-col rounded-2xl p-8 ring-1 transition
+            ${t.featured ? "bg-ossfe-dark ring-accent/60" : "bg-ossfe-dark/50 ring-white/10"}`}
+            >
+              {t.featured && (
+                <span class="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-accent px-4 py-1 text-xs font-semibold text-ossfe-darker">
+                  Most popular
+                </span>
+              )}
+              <h3 class="font-display text-2xl text-ink">{t.name}</h3>
+              <div class="mt-2 flex items-baseline gap-2">
+                <span class="font-display text-3xl text-ink">{t.price}</span>
+                {t.slots && (
+                  <span class="font-body text-xs text-accent">{t.slots}</span>
+                )}
+              </div>
+              {t.includes ? (
+                <p class="mt-5 rounded-lg bg-accent/10 px-3 py-2 font-body text-sm font-semibold text-accent">
+                  ✦ Everything in {t.includes}, plus:
+                </p>
+              ) : (
+                <p class="mt-5 font-body text-sm text-ink-faint">Includes:</p>
+              )}
+              <ul class="mt-4 space-y-3">
+                {t.perks.map((p) => (
+                  <li class="flex items-start gap-2 font-body text-sm text-ink-muted">
+                    <span class="text-accent">✓</span>
+                    <span>{p}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
-            {t.includes
-              ? <p class="mt-5 rounded-lg bg-accent/10 px-3 py-2 font-body text-sm font-semibold text-accent">✦ Everything in {t.includes}, plus:</p>
-              : <p class="mt-5 font-body text-sm text-ink-faint">Includes:</p>}
-            <ul class="mt-4 space-y-3">
-              {t.perks.map((p) => (
-                <li class="flex items-start gap-2 font-body text-sm text-ink-muted"><span class="text-accent">✓</span><span>{p}</span></li>
-              ))}
-            </ul>
-          </div>
-        ))}
+          ))
+        }
       </div>
 
       <!-- À la carte -->
-      <div class="mt-16">
-        <h3 class="text-center font-display text-2xl text-ink">À la carte add-ons</h3>
-        <div class="mx-auto mt-8 max-w-2xl divide-y divide-white/10 rounded-2xl bg-ossfe-dark/50 ring-1 ring-white/10">
-          {alaCarte.map((a) => (
-            <div class="flex items-center justify-between px-6 py-4">
-              <span class="font-body text-ink-muted">{a.item}</span>
-              <span class="font-display text-accent">{a.price}</span>
-            </div>
-          ))}
+      <div class="mt-16 grid gap-10 md:grid-cols-2">
+        <div>
+          <h3 class="font-display text-2xl text-ink">À la carte add-ons</h3>
+          <div class="mt-6 space-y-3">
+            {
+              alaCarte.map((a) => (
+                <div class="rounded-2xl bg-ossfe-dark/50 p-5 ring-1 ring-white/10">
+                  <div class="flex items-baseline justify-between gap-4">
+                    <span class="font-body font-semibold text-ink-muted">
+                      {a.item}
+                    </span>
+                    <span class="whitespace-nowrap font-display text-accent">
+                      {a.price}
+                    </span>
+                  </div>
+                  <p class="mt-1 font-body text-sm text-ink-faint">
+                    {a.summary}
+                  </p>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+
+        <!-- Sponsor-funded prizes -->
+        <div>
+          <h3 class="font-display text-2xl text-ink">Sponsor-funded prizes</h3>
+          <div
+            class="mt-6 divide-y divide-white/10 rounded-2xl bg-ossfe-dark/50 ring-1 ring-white/10"
+          >
+            {
+              prizes.map((p) => (
+                <div class="flex items-center justify-between px-6 py-4">
+                  <span
+                    class={`font-body ${p.sponsored ? "text-ink-faint line-through" : "text-ink-muted"}`}
+                  >
+                    {p.item}
+                  </span>
+                  <span
+                    class={`font-display ${p.sponsored ? "text-ink-faint line-through" : "text-accent"}`}
+                  >
+                    {p.price}
+                  </span>
+                </div>
+              ))
+            }
+          </div>
+          <p class="mt-3 font-body text-sm text-ink-faint">{prizeNote}</p>
         </div>
       </div>
     </div>
@@ -216,14 +350,16 @@ const max = Math.max(...growth.map((g) => g.value));
     <div class="mx-auto max-w-3xl px-6">
       <h2 class="text-center font-display text-4xl text-ink">Sponsor FAQ</h2>
       <div class="mt-10 space-y-3">
-        {faqs.map((f) => (
-          <details class="group rounded-xl bg-ossfe-blue/60 p-5 ring-1 ring-white/5">
-            <summary class="cursor-pointer list-none font-body font-semibold text-ink marker:hidden">
-              <span class="text-accent">＋</span> {f.q}
-            </summary>
-            <p class="mt-3 font-body text-sm text-ink-faint">{f.a}</p>
-          </details>
-        ))}
+        {
+          faqs.map((f) => (
+            <details class="group rounded-xl bg-ossfe-blue/60 p-5 ring-1 ring-white/5">
+              <summary class="cursor-pointer list-none font-body font-semibold text-ink marker:hidden">
+                <span class="text-accent">＋</span> {f.q}
+              </summary>
+              <p class="mt-3 font-body text-sm text-ink-faint">{f.a}</p>
+            </details>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -231,14 +367,210 @@ const max = Math.max(...growth.map((g) => g.value));
   <!-- FINAL CTA -->
   <section class="bg-ossfe-blue py-20">
     <div class="mx-auto max-w-3xl px-6 text-center">
-      <h2 class="font-display text-4xl text-ink">Ready to partner with OSSFE?</h2>
-      <p class="mt-4 font-body text-ink-muted">Tiers are limited and assigned first-come, first-served. Let’s talk.</p>
-      <div class="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-        <a href={`${base}sponsor-prospectus.pdf`} class="rounded-full bg-accent px-8 py-3 font-semibold text-ossfe-darker transition hover:bg-accent-hover">Download the prospectus</a>
-        <a href="mailto:sponsors@ossfe.org" class="rounded-full border border-ink/30 px-8 py-3 font-semibold text-ink transition hover:border-ink hover:bg-ink/10">Email sponsors@ossfe.org</a>
+      <h2 class="font-display text-4xl text-ink">
+        Ready to partner with OSSFE?
+      </h2>
+      <p class="mt-4 font-body text-ink-muted">
+        Tiers are limited and assigned first-come, first-served. Let’s talk.
+      </p>
+      <div
+        class="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
+      >
+        <a
+          href={`${base}${meta.pdf}`}
+          class="rounded-full bg-accent px-8 py-3 font-semibold text-ossfe-darker transition hover:bg-accent-hover"
+          >Download the prospectus</a
+        >
+        <a
+          href={`mailto:${meta.contact}`}
+          class="rounded-full border border-ink/30 px-8 py-3 font-semibold text-ink transition hover:border-ink hover:bg-ink/10"
+          >Email {meta.contact}</a
+        >
       </div>
     </div>
   </section>
 
   <Footer />
+
+  <!-- Charts: chart.js + treemap plugin, bundled and registered explicitly -->
+  <script>
+    import {
+      Chart,
+      BarController,
+      BarElement,
+      CategoryScale,
+      LinearScale,
+      PointElement,
+      Tooltip,
+      Legend,
+    } from "chart.js";
+    import { TreemapController, TreemapElement } from "chartjs-chart-treemap";
+    import {
+      BubbleMapController,
+      GeoFeature,
+      ProjectionScale,
+      SizeScale,
+    } from "chartjs-chart-geo";
+    import { feature } from "topojson-client";
+    import worldData from "world-atlas/countries-110m.json";
+    import data from "../data/sponsors.json";
+
+    Chart.register(
+      BarController,
+      BarElement,
+      CategoryScale,
+      LinearScale,
+      PointElement,
+      Tooltip,
+      Legend,
+      TreemapController,
+      TreemapElement,
+      BubbleMapController,
+      GeoFeature,
+      ProjectionScale,
+      SizeScale,
+    );
+    Chart.defaults.font.family = "'Archivo', system-ui, sans-serif";
+    Chart.defaults.color = "#94A3B8";
+
+    const { audience, topics } = data;
+    const palette = ["#FFB347", "#F59E42", "#D98A2B", "#B36B1E"];
+
+    const treeEl = document.getElementById("audienceChart");
+    if (treeEl) {
+      new Chart(treeEl as HTMLCanvasElement, {
+        type: "treemap",
+        data: {
+          datasets: [
+            {
+              tree: audience,
+              key: "pct",
+              borderWidth: 2,
+              borderColor: "#333F50",
+              backgroundColor: (ctx: any) =>
+                ctx.type === "data"
+                  ? palette[ctx.dataIndex % palette.length]
+                  : "transparent",
+              labels: {
+                display: true,
+                color: "#1E2731",
+                font: { weight: "bold", size: 14 },
+                formatter: (ctx: any) => [
+                  audience[ctx.dataIndex].label,
+                  audience[ctx.dataIndex].pct + "%",
+                ],
+              },
+            } as any,
+          ],
+        },
+        options: {
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                title: (i: any) => audience[i[0].dataIndex].label,
+                label: (i: any) =>
+                  audience[i.dataIndex].pct + "% of participants",
+              },
+            },
+          },
+        },
+      });
+    }
+
+    const topicsEl = document.getElementById("topicsChart");
+    if (topicsEl) {
+      new Chart(topicsEl as HTMLCanvasElement, {
+        type: "bar",
+        data: {
+          labels: topics.map((t) => t.label),
+          datasets: [
+            {
+              data: topics.map((t) => t.count),
+              backgroundColor: "#FFB347",
+              borderRadius: 4,
+            },
+          ],
+        },
+        options: {
+          indexAxis: "y",
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: { label: (i: any) => i.raw + " submissions" },
+            },
+          },
+          scales: {
+            x: {
+              grid: { color: "rgba(255,255,255,0.06)" },
+              ticks: { color: "#94A3B8" },
+            },
+            y: { grid: { display: false }, ticks: { color: "#E2E8F0" } },
+          },
+        },
+      });
+    }
+
+    // Bubble map — attendee home countries, 2025 vs 2026
+    const mapEl = document.getElementById("countriesMap");
+    if (mapEl) {
+      const world = worldData as any;
+      const countries = (feature(world, world.objects.countries) as any).features;
+      const points = (year: "y2025" | "y2026") =>
+        data.countries
+          .filter((c: any) => c[year] > 0)
+          .map((c: any) => ({ longitude: c.lng, latitude: c.lat, value: c[year], name: c.name }));
+
+      new Chart(mapEl as HTMLCanvasElement, {
+        type: "bubbleMap",
+        data: {
+          datasets: [
+            {
+              label: "2025 (online)",
+              outline: countries,
+              showOutline: true,
+              outlineBackgroundColor: "rgba(255,255,255,0.04)",
+              outlineBorderColor: "rgba(255,255,255,0.18)",
+              outlineBorderWidth: 0.5,
+              backgroundColor: "rgba(255,179,71,0.55)",
+              borderColor: "#FFB347",
+              borderWidth: 1,
+              data: points("y2025"),
+            },
+            {
+              label: "2026 (in-person)",
+              outline: countries,
+              showOutline: true,
+              outlineBackgroundColor: "rgba(255,255,255,0.04)",
+              outlineBorderColor: "rgba(255,255,255,0.18)",
+              outlineBorderWidth: 0.5,
+              backgroundColor: "rgba(79,209,197,0.55)",
+              borderColor: "#4FD1C5",
+              borderWidth: 1,
+              data: points("y2026"),
+            },
+          ],
+        },
+        options: {
+          maintainAspectRatio: false,
+          showGraticule: false,
+          plugins: {
+            legend: { position: "top", labels: { color: "#E2E8F0", usePointStyle: true } },
+            tooltip: {
+              callbacks: {
+                title: (i: any) => i[0].raw.name,
+                label: (i: any) => `${i.dataset.label}: ${i.raw.value} attendees`,
+              },
+            },
+          },
+          scales: {
+            projection: { axis: "x", projection: "equalEarth" },
+            size: { axis: "x", size: [3, 28], mode: "radius", display: false },
+          },
+        },
+      } as any);
+    }
+  </script>
 </Base>

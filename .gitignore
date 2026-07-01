@@ -22,3 +22,7 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# raw survey / registration exports — contain personal data (names, emails,
+# addresses). Kept locally to build stats; must NOT be committed.
+data/

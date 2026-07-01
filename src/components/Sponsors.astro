@@ -1,14 +1,11 @@
 ---
 // src/components/Sponsors.astro — HOME PAGE TEASER (links to /sponsors)
+import data from '../data/sponsors.json';
 
-// Just the headline tier prices for a quick glance.
-const tiers = [
-  { name: 'Silver', price: '$2,000' },
-  { name: 'Gold', price: '$5,000', featured: true },
-  { name: 'Diamond', price: '$10,000' },
-];
+// Just the headline tier prices for a quick glance (shared source of truth).
+const tiers = data.tiers.map((t) => ({ name: t.name, price: t.price, featured: t.featured }));
 
-const confirmedSponsors = []; // add { name, logo } as they sign
+const confirmedSponsors: { name: string; logo: string }[] = []; // add as they sign
 const base = import.meta.env.BASE_URL;
 ---
 
@@ -18,8 +15,8 @@ const base = import.meta.env.BASE_URL;
     <p class="font-body text-sm uppercase tracking-widest text-accent">Partner with us</p>
     <h2 class="mt-3 font-display text-4xl text-ink md:text-5xl">Sponsor OSSFE 2027</h2>
     <p class="mx-auto mt-4 max-w-2xl font-body text-ink-muted">
-      Put your brand in front of the open-source fusion community — researchers, national labs
-      and startups — and help sustain the tools the field depends on.
+      Put your brand in front of the open-source fusion community: researchers, national labs
+      and startups, and help sustain the tools the field depends on.
     </p>
 
     <!-- Quick tier glance -->
@@ -44,7 +41,7 @@ const base = import.meta.env.BASE_URL;
         </div>
       ) : (
         <p class="font-body text-ink-faint">
-          Sponsor line-up coming soon — <span class="text-ink-muted">your logo could be here.</span>
+          Sponsor line-up coming soon: <span class="text-ink-muted">your logo could be here.</span>
         </p>
       )}
     </div>
