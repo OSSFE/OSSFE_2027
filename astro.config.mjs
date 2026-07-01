@@ -3,6 +3,6 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   site: 'https://ossfe.github.io',
-  base: '/ossfe_2027_website/',
+  base: '/OSSFE_2027/',
   vite: { plugins: [tailwindcss()] },
 });
