@@ -23,6 +23,11 @@ const previousSponsors = data.previousSponsors as {
   name: string;
   logo: string;
 }[];
+
+const audience = data.audience;
+const audTotal = audience.reduce((s, a) => s + a.count, 0);
+const audPalette = ["#FFB347", "#F59E42", "#D98A2B", "#B36B1E"];
+const pctOf = (n: number) => Math.round((n / audTotal) * 100);
 ---
 
 <Base title="Sponsor OSSFE 2027">
@@ -170,17 +175,78 @@ const previousSponsors = data.previousSponsors as {
     </div>
   </section>
 
-  <!-- DATA: WHO ATTENDS (treemap) + POPULAR TOPICS (bar) -->
+  <!-- DATA: WHO ATTENDS (stacked bar + top institutions) -->
   <section class="bg-ossfe-blue py-20">
-    <div class="mx-auto grid max-w-6xl gap-16 px-6 md:grid-cols-2">
-      <div>
-        <h3 class="font-display text-2xl text-ink">Who attends</h3>
-        <p class="mt-2 font-body text-sm text-ink-faint">
-          Participants by institution type (2026 in-person edition)
-        </p>
-        <div class="mt-6 h-72"><canvas id="audienceChart"></canvas></div>
+    <div class="mx-auto max-w-6xl px-6">
+      <h3 class="font-display text-2xl text-ink">Who attends</h3>
+      <p class="mt-2 font-body text-sm text-ink-faint">
+        Participants by institution type (2026 in-person edition)
+      </p>
+
+      <!-- Stacked proportion bar -->
+      <div class="mt-6 flex h-12 w-full overflow-hidden rounded-xl ring-1 ring-white/10">
+        {
+          audience.map((a, i) => (
+            <div
+              class="flex items-center justify-center"
+              style={`width:${(a.count / audTotal) * 100}%; background:${audPalette[i % audPalette.length]}`}
+            >
+              {pctOf(a.count) >= 6 && (
+                <span class="font-body text-xs font-bold text-ossfe-darker">
+                  {pctOf(a.count)}%
+                </span>
+              )}
+            </div>
+          ))
+        }
       </div>
-      <div>
+      <div class="mt-3 flex flex-wrap gap-x-6 gap-y-2">
+        {
+          audience.map((a, i) => (
+            <span class="flex items-center gap-2 font-body text-sm text-ink-muted">
+              <span
+                class="inline-block h-3 w-3 rounded-sm"
+                style={`background:${audPalette[i % audPalette.length]}`}
+              />
+              {a.label} · {pctOf(a.count)}%
+            </span>
+          ))
+        }
+      </div>
+
+      <!-- Top institutions per category -->
+      <div class="mt-12 grid gap-8 md:grid-cols-3">
+        {
+          audience.slice(0, 3).map((a, i) => (
+            <div>
+              <div class="flex items-baseline justify-between border-b border-white/10 pb-2">
+                <h4
+                  class="font-display text-lg"
+                  style={`color:${audPalette[i % audPalette.length]}`}
+                >
+                  {a.label}
+                </h4>
+                <span class="font-body text-xs text-ink-faint">
+                  {pctOf(a.count)}% · {a.children.length} institutions
+                </span>
+              </div>
+              <ol class="mt-3 space-y-1.5">
+                {a.children.slice(0, 10).map((c, j) => (
+                  <li class="flex items-baseline gap-2 font-body text-sm">
+                    <span class="w-4 shrink-0 text-right text-ink-faint">
+                      {j + 1}
+                    </span>
+                    <span class="truncate text-ink-muted">{c.name}</span>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          ))
+        }
+      </div>
+
+      <!-- What they came for -->
+      <div class="mt-16">
         <h3 class="font-display text-2xl text-ink">What they came for</h3>
         <p class="mt-2 font-body text-sm text-ink-faint">
           Top topics submitted for the 2026 programme
@@ -404,7 +470,6 @@ const previousSponsors = data.previousSponsors as {
       Tooltip,
       Legend,
     } from "chart.js";
-    import { TreemapController, TreemapElement } from "chartjs-chart-treemap";
     import {
       BubbleMapController,
       GeoFeature,
@@ -423,8 +488,6 @@ const previousSponsors = data.previousSponsors as {
       PointElement,
       Tooltip,
       Legend,
-      TreemapController,
-      TreemapElement,
       BubbleMapController,
       GeoFeature,
       ProjectionScale,
@@ -433,51 +496,7 @@ const previousSponsors = data.previousSponsors as {
     Chart.defaults.font.family = "'Archivo', system-ui, sans-serif";
     Chart.defaults.color = "#94A3B8";
 
-    const { audience, topics } = data;
-    const palette = ["#FFB347", "#F59E42", "#D98A2B", "#B36B1E"];
-
-    const treeEl = document.getElementById("audienceChart");
-    if (treeEl) {
-      new Chart(treeEl as HTMLCanvasElement, {
-        type: "treemap",
-        data: {
-          datasets: [
-            {
-              tree: audience,
-              key: "pct",
-              borderWidth: 2,
-              borderColor: "#333F50",
-              backgroundColor: (ctx: any) =>
-                ctx.type === "data"
-                  ? palette[ctx.dataIndex % palette.length]
-                  : "transparent",
-              labels: {
-                display: true,
-                color: "#1E2731",
-                font: { weight: "bold", size: 14 },
-                formatter: (ctx: any) => [
-                  audience[ctx.dataIndex].label,
-                  audience[ctx.dataIndex].pct + "%",
-                ],
-              },
-            } as any,
-          ],
-        },
-        options: {
-          maintainAspectRatio: false,
-          plugins: {
-            legend: { display: false },
-            tooltip: {
-              callbacks: {
-                title: (i: any) => audience[i[0].dataIndex].label,
-                label: (i: any) =>
-                  audience[i.dataIndex].pct + "% of participants",
-              },
-            },
-          },
-        },
-      });
-    }
+    const { topics } = data;
 
     const topicsEl = document.getElementById("topicsChart");
     if (topicsEl) {

@@ -37,18 +37,17 @@
 }
 
 #let statcard(s) = box(
-  fill: dark, radius: 8pt, inset: (x: 12pt, y: 10pt), width: 100%, height: 100%,
+  fill: dark, radius: 8pt, inset: (x: 13pt, y: 12pt), width: 100%, height: 100%,
 )[
-  #align(horizon)[
-    #if "rating" in s [
-      #stars(s.rating)
-      #v(2pt)
-      #text(fill: faint, size: 8pt)[#s.label (#s.value)]
-    ] else [
-      #text(fill: accent, size: 19pt, weight: "bold")[#s.value]
-      #v(-3pt)
-      #text(fill: faint, size: 8pt)[#s.label]
-    ]
+  #set par(leading: 0.45em)
+  #if "rating" in s [
+    #stars(s.rating)
+    #v(3pt)
+    #text(fill: faint, size: 8pt)[#s.label (#s.value)]
+  ] else [
+    #text(fill: accent, size: 19pt, weight: "bold")[#s.value]
+    #v(2pt)
+    #text(fill: faint, size: 8pt)[#s.label]
   ]
 ]
 
@@ -83,6 +82,7 @@
   #v(2pt)
   #text(fill: faint, size: 8pt)[#q.source]
 ]
+
 
 // ════════════════════════ COVER ════════════════════════
 #page(fill: darker, margin: 0pt)[
@@ -136,10 +136,10 @@
 #v(3pt)
 #text(fill: faint, size: 9pt)[From the post-event feedback survey (#data.feedbackResponses respondents) and registration data.]
 #v(8pt)
-#grid(columns: (1fr, 1fr, 1fr, 1fr), gutter: 8pt, rows: 2cm,
+#grid(columns: (1fr, 1fr, 1fr, 1fr), gutter: 8pt, rows: 2.6cm,
   ..data.headline.map(s => statcard(s)))
 #v(8pt)
-#grid(columns: (1fr, 1fr, 1fr), gutter: 8pt, rows: (2cm, 2cm),
+#grid(columns: (1fr, 1fr, 1fr), gutter: 8pt, rows: (2.6cm, 2.6cm),
   ..data.feedback.map(s => statcard(s)))
 
 #v(14pt)
@@ -147,30 +147,63 @@
 
 #pagebreak()
 
-// ════════════════════════ AUDIENCE + TOPICS ════════════════════════
+// ════════════════════════ WHO ATTENDS (stacked bar + top institutions) ════════════════════════
+#let atotal = data.audience.map(a => a.count).sum()
+#let apct(n) = calc.round(n / atotal * 100)
 #h2[Who attends]
 #v(2pt)
 #text(fill: faint, size: 9pt)[Participants by institution type (2026 in-person edition).]
-#v(8pt)
-#box(radius: 6pt, clip: true, width: 100%)[
-  #grid(
-    columns: data.audience.map(a => a.pct * 1fr),
-    rows: 42pt,
+#v(10pt)
+
+// stacked proportion bar
+#box(width: 100%, radius: 6pt, clip: true)[
+  #grid(columns: data.audience.map(a => a.count * 1fr), rows: 34pt,
     ..data.audience.enumerate().map(((i, a)) => box(
       fill: palette.at(calc.rem(i, palette.len())), width: 100%, height: 100%, inset: 6pt,
     )[
-      #align(left + horizon)[#text(fill: darker, size: 8.5pt, weight: "bold")[#if a.pct >= 8 [#a.pct%]]]
-    ])
-  )
+      #align(center + horizon)[#text(fill: darker, size: 9pt, weight: "bold")[#if apct(a.count) >= 6 [#apct(a.count)%]]]
+    ]))
 ]
 #v(6pt)
-#grid(columns: (1fr, 1fr, 1fr, 1fr), gutter: 6pt,
+#grid(columns: (auto, auto, auto, auto), gutter: 14pt,
   ..data.audience.enumerate().map(((i, a)) => [
     #box(fill: palette.at(calc.rem(i, palette.len())), width: 8pt, height: 8pt, radius: 2pt)
-    #h(3pt) #text(fill: muted, size: 8pt)[#a.label · #a.pct%]
+    #h(3pt) #text(fill: muted, size: 8.5pt)[#a.label · #apct(a.count)%]
   ]))
 
+#v(16pt)
+#text(fill: faint, size: 9pt)[Top institutions in each category, ranked by number of attendees.]
+#v(8pt)
+#let cats = data.audience.slice(0, 3)
+// one grid so rank rows line up across the three categories
+#let headercells = cats.enumerate().map(((i, a)) => [
+  #text(fill: palette.at(i), size: 11pt, weight: "bold")[#a.label]
+  #h(4pt) #text(fill: accent, size: 8.5pt)[#apct(a.count)%]
+  #v(1pt)
+  #text(fill: faint, size: 7pt)[#a.children.len() institutions]
+  #v(3pt)
+  #line(length: 100%, stroke: 0.5pt + hair)
+])
+// truncate long names to a single line with an ellipsis (no wrapping)
+#let trunc(s, n) = {
+  let g = s.clusters()
+  if g.len() > n { g.slice(0, n).join().trim() + "…" } else { s }
+}
+#let cell(i, rk) = {
+  let a = cats.at(i)
+  if rk < a.children.len() {
+    grid(columns: (8pt, 1fr), gutter: 4pt,
+      text(fill: faint, size: 6.5pt)[#(rk + 1)],
+      text(fill: muted, size: 7pt)[#trunc(a.children.at(rk).name, 35)])
+  } else { [] }
+}
+#let datacells = range(10).map(rk => (0, 1, 2).map(i => cell(i, rk))).flatten()
+#grid(columns: (1fr, 1fr, 1fr), column-gutter: 14pt, row-gutter: 5pt, align: top,
+  ..headercells, ..datacells)
+
 #v(18pt)
+
+// ════════════════════════ WHAT THEY CAME FOR (topics) ════════════════════════
 #h2[What they came for]
 #v(2pt)
 #text(fill: faint, size: 9pt)[Top topics submitted for the 2026 programme.]
@@ -187,30 +220,26 @@
   #v(4pt)
 ]
 
-#v(16pt)
-#h2[A growing track record]
-#v(8pt)
-#grid(columns: (1fr, 1fr, 1fr), gutter: 8pt, rows: 2.7cm,
-  ..data.editions.map(e => box(
-    fill: if "highlight" in e { rgb(255,179,71,26) } else { dark },
-    radius: 8pt, inset: 12pt, width: 100%, height: 100%,
-    stroke: if "highlight" in e { 0.8pt + accent } else { none },
-  )[
-    #align(horizon)[
-      #text(fill: ink, size: 15pt, weight: "bold")[#e.year]
-      #v(2pt)
-      #text(fill: if "highlight" in e { accent } else { faint }, size: 7.5pt, weight: "semibold", tracking: 1.5pt)[#upper(e.format)]
-      #v(4pt)
-      #text(fill: muted, size: 8.5pt)[#e.stat]
-    ]
-  ]))
-
-#v(12pt)
-#quotecard(data.quotes.at(3))
-
 #pagebreak()
 
-// ════════════════════════ WHERE ATTENDEES COME FROM (bubble map) ════════════════════════
+// ════════════════════════ TRACK RECORD + WHERE ATTENDEES COME FROM ════════════════════════
+#h2[A growing track record]
+#v(8pt)
+#grid(columns: (1fr, 1fr, 1fr), gutter: 8pt, rows: 3.1cm,
+  ..data.editions.map(e => box(
+    fill: if "highlight" in e { rgb(255,179,71,26) } else { dark },
+    radius: 8pt, inset: 13pt, width: 100%, height: 100%,
+    stroke: if "highlight" in e { 0.8pt + accent } else { none },
+  )[
+    #set par(leading: 0.5em)
+    #text(fill: ink, size: 15pt, weight: "bold")[#e.year]
+    #v(2pt)
+    #text(fill: if "highlight" in e { accent } else { faint }, size: 7.5pt, weight: "semibold", tracking: 1.5pt)[#upper(e.format)]
+    #v(3pt)
+    #text(fill: muted, size: 8.5pt)[#e.stat]
+  ]))
+
+#v(16pt)
 #h2[Where attendees come from]
 #v(2pt)
 #text(fill: faint, size: 9pt)[Home countries of attendees across the 2025 and 2026 editions (#data.countries.len() countries).]
@@ -247,6 +276,9 @@
 )
 #v(6pt)
 #text(fill: faint, size: 8pt)[Bubble area is proportional to the number of attendees from each country.]
+
+#v(14pt)
+#quotecard(data.quotes.at(3))
 
 #pagebreak()
 
@@ -291,7 +323,7 @@
     #text(fill: faint, size: 8pt)[#data.prizeNote]
   ])
 
-#v(16pt)
+#pagebreak()
 #h2[Sponsor FAQ]
 #v(8pt)
 #for f in data.faqs [

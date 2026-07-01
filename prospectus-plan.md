@@ -10,7 +10,8 @@
 A polished, convincing prospectus that:
 - Leads with **value + evidence**, not just a price grid.
 - Exists as a **web page** (`/sponsors`, already built in Astro) *and* a **downloadable PDF** (Typst) generated from the same data.
-- Uses real **OSSFE 2026 data** to prove reach and impact.
+- Uses real **OSSFE 2026 and 2025 data** to prove reach and impact.
+    - Data can be found in the folder data/2025/ and data/2026
 
 ---
 
@@ -22,6 +23,8 @@ A polished, convincing prospectus that:
 | PDF | Typst | `/public/sponsor-prospectus.pdf` (linked from site) |
 
 Keep tier/stat data in **one place** so web and PDF never drift.
+
+PDF should be built using data/assets from the webpage
 
 ---
 
@@ -50,14 +53,25 @@ Confirmed signals from the 2026 feedback survey (~40 respondents):
 - **International reach:** attendees from across Europe, UK, US, national labs (PPPL, UKAEA, CEA…), startups.
 - **Job-matching interest:** many "Yes, I would participate" in a sponsor↔attendee jobs programme → **direct hook for recruiting sponsors**.
 
-**TODO — pull hard numbers from registration/pretix:**
-- [ ] Total attendees (2026 and 2025 for growth trend)
-- [ ] Exact # countries
-- [ ] # talks / posters / tutorials
-- [ ] Website / newsletter / social / recording-view stats
-- [ ] Audience % breakdown (academia / lab / industry / student)
+All the raw data from the previous version of the conference can be found in the data folder. Feel free to suggest anything else based on your own analysis of the data.
 
-Mark any projection clearly as "2027 projected".
+Use this page as inspiration for representation of the data: https://ossfe.org/OSSFE_2025/plot
+
+We like the Tree map for participants per institution type.
+
+We can use chart.js for the plots 
+
+We can refine the plan based on your own evaluation of the data too.
+
+**Hard numbers pulled from the data folder** (now live on `/sponsors` + PDF, single source `src/data/sponsors.json`):
+- [x] Attendance: 2025 online **219 registrants**; 2026 in-person **~115 unique attendees** (deduped from 145 Eventbrite ticket rows, which double-counted the Proxima tour add-on), **77 organisations**.
+- [x] Countries — **33** distinct attendee home countries across editions (2025 registration + 2026 Eventbrite, normalised & deduped). Shown as an interactive **bubble map** (`chartjs-chart-geo`) with a 2025/2026 legend toggle.
+- [x] Talks/posters/tutorials — **105** abstracts submitted in 2026 (100 in 2025) → "100+".
+- [x] Audience % (institution type, 2026 in-person, deduped): Industry **42%**, National lab **35%**, Academia **21%**, Other **2%**. *(Rendered as the tree map on the web page, stacked bar in the PDF.)*
+- [x] Feedback (n=42): overall value **4.4/5**; **100%** discovered new tools; **93%** would attend again; **62%** OSS maintainers/contributors; **81%** want a jobs programme; **76%** more likely to contribute to OSS.
+- [ ] Website / newsletter / social / recording-view stats — *not in the current exports; omitted rather than invented.*
+
+Projections (2027) are clearly labelled "projected". Note: 2025 (online) vs 2026 (in-person) aren't directly comparable, so we show them as distinct editions rather than a single misleading growth curve.
 
 ---
 
@@ -73,24 +87,30 @@ Use these as pull-quotes / rationale:
 
 ## 6. Fixes needed vs. old prospectus
 
-- [ ] Merge the **two conflicting tier tables** into one canonical version.
-- [ ] Fix currency typos ("500e" → €500) and set **currency = USD** (Madison/MIT).
-- [ ] Define **Silver benefits explicitly** (Lanyard add-on references them).
-- [ ] Add the **audience data / stats** (was missing entirely).
-- [ ] Note **MIT as host** → invoicing/tax details, overhead considerations.
-- [ ] Add scarcity ("Diamond — only 3").
+- [x] Merge the **two conflicting tier tables** into one canonical version (in `sponsors.json`).
+- [x] Fix currency typos and set **currency = USD** (Madison/MIT).
+- [x] Define **Silver benefits explicitly** (Lanyard add-on references them).
+- [x] Add the **audience data / stats** (tree map + feedback stats + topics bar).
+- [x] Note **MIT as host** → invoicing/tax FAQ added.
+- [x] Add scarcity ("Diamond — only 3").
 
 ---
 
 ## 7. Build tasks
 
-- [ ] Finalise tier pricing + perks with the board.
-- [ ] Collect the hard numbers (§4 TODO).
-- [ ] Write final copy (hook, why-sponsor, FAQ).
-- [ ] Build Typst PDF template mirroring `/sponsors` data + branding.
-- [ ] Wire `/public/sponsor-prospectus.pdf` link from the site.
+- [ ] Finalise tier pricing + perks with the board *(prices are still the draft values in `sponsors.json`)*.
+- [x] Collect the hard numbers (§4).
+- [x] Write final copy (hook, why-sponsor, FAQ).
+- [x] Build Typst PDF template mirroring `/sponsors` data + branding (`prospectus/prospectus.typ`, `npm run prospectus`).
+- [x] Wire `/public/sponsor-prospectus.pdf` link from the site (hero + final CTA).
 - [ ] Internal review by all 3 board members.
 - [ ] Ship + begin outreach (Oct 2026).
+
+### Implementation notes
+- **Single source of truth:** `src/data/sponsors.json` feeds the web page, the home teaser, and the Typst PDF.
+- **Web page:** `src/pages/sponsors.astro` — chart.js treemap (institution type) + horizontal bar (topics), loaded from CDN.
+- **PDF:** `prospectus/prospectus.typ` — dark brand theme, Archivo font bundled in `prospectus/fonts/`. Rebuild with `npm run prospectus` (needs Typst installed).
+- **Data privacy:** raw exports in `data/` contain names/emails/addresses → git-ignored; only aggregate stats live in the repo.
 
 ---
 
