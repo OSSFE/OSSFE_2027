@@ -1,0 +1,47 @@
+---
+// src/components/QuoteCarousel.astro
+const quotes = [
+  { text: 'OSSFE is the most valuable event I ever attended in fusion.', author: 'OSSFE 2026 attendee' },
+  { text: 'I was amazed by the pace and the growth of open-source software for fusion.', author: 'OSSFE 2026 attendee' },
+  { text: 'You are building a long-term community. We can be ambitious, and the community is in good hands.', author: 'OSSFE 2026 attendee' },
+  { text: 'The most valuable outcome for me was seeing a lot of like-minded people in one room.', author: 'OSSFE 2026 attendee' },
+  { text: 'Fantastic event! Thank you so much for organising.', author: 'OSSFE 2026 attendee' },
+];
+---
+
+<div id="quote-carousel" class="relative mx-auto mt-16 max-w-3xl">
+  <div class="relative min-h-[9rem]">
+    {quotes.map((q, i) => (
+      <figure
+        class={`quote-slide absolute inset-0 flex flex-col items-center justify-center text-center transition-opacity duration-1000 ${i === 0 ? 'opacity-100' : 'opacity-0'}`}
+      >
+        <blockquote class="font-display text-2xl leading-snug text-ink md:text-3xl">
+          “{q.text}”
+        </blockquote>
+        <figcaption class="mt-4 font-body text-sm text-ink-faint">— {q.author}</figcaption>
+      </figure>
+    ))}
+  </div>
+
+  <div class="mt-6 flex justify-center gap-2">
+    {quotes.map((_, i) => (
+      <span data-qdot={i} class={`h-2 w-2 rounded-full transition ${i === 0 ? 'bg-accent' : 'bg-white/30'}`}></span>
+    ))}
+  </div>
+</div>
+
+<script>
+  const root = document.getElementById('quote-carousel');
+  if (root && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const slides = root.querySelectorAll('.quote-slide');
+    const dots = root.querySelectorAll('[data-qdot]');
+    let current = 0;
+    setInterval(() => {
+      slides[current].classList.replace('opacity-100', 'opacity-0');
+      dots[current]?.classList.replace('bg-accent', 'bg-white/30');
+      current = (current + 1) % slides.length;
+      slides[current].classList.replace('opacity-0', 'opacity-100');
+      dots[current]?.classList.replace('bg-white/30', 'bg-accent');
+    }, 5000); // 5s per quote
+  }
+</script>
