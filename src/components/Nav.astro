@@ -21,7 +21,7 @@ const base = import.meta.env.BASE_URL;
       {
         links.map((l) => (
           <a
-            href={l.href}
+            href={`${base}${l.href}`}
             class="font-body text-ink-muted transition hover:text-ink"
           >
             {l.label}
@@ -29,7 +29,7 @@ const base = import.meta.env.BASE_URL;
         ))
       }
       <a
-        href="#register"
+        href={`${base}#register`}
         class="rounded-full bg-accent px-5 py-2 font-semibold text-ossfe-darker transition hover:bg-accent-hover"
       >
         Register
