@@ -1,8 +1,66 @@
 ---
+// src/components/Footer.astro
 const base = import.meta.env.BASE_URL;
+const nav = [
+  { href: '#about', label: 'About' },
+  { href: '#cfp', label: 'Call for Proposals' },
+  { href: '#program', label: 'Program' },
+  { href: '#sponsors', label: 'Sponsors' },
+  { href: '#travel', label: 'Travel' },
+];
+const socials = [
+  { href: 'https://www.youtube.com/watch?v=pcuDrO1bBdU', label: 'YouTube' },
+  { href: 'https://www.linkedin.com/company/ossfe', label: 'LinkedIn' },
+  { href: 'https://github.com/OSSFE', label: 'GitHub' },
+];
+const year = new Date().getFullYear();
 ---
-<section class="bg-ossfe-dark py-12">
 
+<footer class="bg-ossfe-darker py-16">
+  <div class="mx-auto max-w-6xl px-6">
+    <div class="grid gap-10 md:grid-cols-3">
 
-<img src={`${base}images/ossfe light transparent cropped.svg`} alt="OSSFE" class="h-10 w-auto opacity-90" />
-</section>
+      {/* Logo + blurb */}
+      <div>
+        <img src=`${base}images/ossfe light transparent cropped.svg` alt="OSSFE" class="h-14 w-auto" />
+        <p class="mt-4 max-w-xs font-body text-sm text-ink-faint">
+          Open Source Software for Fusion Energy. Madison, Wisconsin · June 2027.
+        </p>
+      </div>
+
+      {/* Nav */}
+      <div>
+        <h3 class="font-display text-sm uppercase tracking-widest text-accent">Explore</h3>
+        <ul class="mt-4 space-y-2">
+          {nav.map((l) => (
+            <li><a href={l.href} class="font-body text-sm text-ink-muted transition hover:text-ink">{l.label}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Contact + socials */}
+      <div>
+        <h3 class="font-display text-sm uppercase tracking-widest text-accent">Connect</h3>
+        <ul class="mt-4 space-y-2">
+          <li><a href="mailto:contact@ossfe.org" class="font-body text-sm text-ink-muted transition hover:text-ink">contact@ossfe.org</a></li>
+          <li><a href="mailto:sponsors@ossfe.org" class="font-body text-sm text-ink-muted transition hover:text-ink">sponsors@ossfe.org</a></li>
+        </ul>
+        <div class="mt-4 flex flex-wrap gap-4">
+          {socials.map((s) => (
+            <a href={s.href} target="_blank" rel="noopener"
+               class="font-body text-sm text-ink-faint transition hover:text-accent">{s.label}</a>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    {/* Bottom bar */}
+    <div class="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 sm:flex-row">
+      <p class="font-body text-xs text-ink-faint">© {year} OSSFE. All rights reserved.</p>
+      <div class="flex gap-6">
+        <a href="/code-of-conduct" class="font-body text-xs text-ink-faint transition hover:text-ink">Code of Conduct</a>
+        <a href="/privacy" class="font-body text-xs text-ink-faint transition hover:text-ink">Privacy</a>
+      </div>
+    </div>
+  </div>
+</footer>
