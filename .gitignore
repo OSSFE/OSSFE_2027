@@ -25,4 +25,4 @@ pnpm-debug.log*
 
 # raw survey / registration exports — contain personal data (names, emails,
 # addresses). Kept locally to build stats; must NOT be committed.
-data/
+ossfe_data/

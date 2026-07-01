@@ -1,0 +1,309 @@
+{
+  "meta": {
+    "event": "OSSFE 2027",
+    "location": "Madison, Wisconsin, USA",
+    "dates": "June 2027",
+    "organiser": "Organised with the MIT Plasma Science and Fusion Center",
+    "currency": "USD",
+    "contact": "sponsors@ossfe.org",
+    "pdf": "sponsor-prospectus.pdf"
+  },
+  "headline": [
+    {
+      "value": "115",
+      "label": "In-person attendees (2026)"
+    },
+    {
+      "value": "77",
+      "label": "Organisations represented"
+    },
+    {
+      "value": "33",
+      "label": "Countries"
+    },
+    {
+      "value": "100+",
+      "label": "Talks, tutorials & posters"
+    }
+  ],
+  "feedbackResponses": 42,
+  "feedback": [
+    {
+      "value": "4.4/5",
+      "rating": 4.4,
+      "label": "Average overall value rating"
+    },
+    {
+      "value": "100%",
+      "label": "Discovered new tools or projects"
+    },
+    {
+      "value": "93%",
+      "label": "Would attend OSSFE again"
+    },
+    {
+      "value": "62%",
+      "label": "Are OSS maintainers or contributors"
+    },
+    {
+      "value": "81%",
+      "label": "Want a sponsor↔attendee jobs programme"
+    },
+    {
+      "value": "76%",
+      "label": "More likely to contribute to OSS afterwards"
+    }
+  ],
+  "audience": [
+    {
+      "label": "Industry", "count": 48,
+      "children": [{ "name": "Proxima Fusion", "count": 8 }, { "name": "Renaissance Fusion", "count": 4 }, { "name": "Eni", "count": 3 }, { "name": "Tokamak Energy", "count": 2 }, { "name": "Morton Labs", "count": 2 }, { "name": "nTtau Digital", "count": 2 }, { "name": "Gauss Fusion", "count": 2 }, { "name": "Marvel Fusion", "count": 2 }, { "name": "GenF", "count": 2 }, { "name": "ATG Science & Engineering S.L.", "count": 1 }, { "name": "First Light Fusion", "count": 1 }, { "name": "General Atomics", "count": 1 }, { "name": "Cosylab", "count": 1 }, { "name": "BaM Scientific Consulting", "count": 1 }, { "name": "RadiaSoft LLC", "count": 1 }, { "name": "Next Step Fusion S.à r.l.", "count": 1 }, { "name": "Focused Energy", "count": 1 }, { "name": "Pranos Fusion", "count": 1 }, { "name": "SHINE Technologies", "count": 1 }, { "name": "Google DeepMind", "count": 1 }, { "name": "Urjanova", "count": 1 }, { "name": "HI Iberia", "count": 1 }, { "name": "79 LABS", "count": 1 }, { "name": "Fusion Advisory Services", "count": 1 }, { "name": "Empresarios Agrupados Internacional", "count": 1 }, { "name": "Ignition Computing", "count": 1 }, { "name": "FusionCatalyst", "count": 1 }, { "name": "Marathon Fusion", "count": 1 }, { "name": "Astral Systems", "count": 1 }, { "name": "Ansys Inc (Part of Synopsys)", "count": 1 }]
+    },
+    {
+      "label": "National lab", "count": 42,
+      "children": [{ "name": "UKAEA", "count": 19 }, { "name": "Max Planck IPP", "count": 3 }, { "name": "Institute of Bioorganic Chemistry of the Polish Academy of Sciences", "count": 2 }, { "name": "Fusion for Energy", "count": 2 }, { "name": "DIFFER", "count": 2 }, { "name": "Princeton Plasma Physics Laboratory", "count": 2 }, { "name": "UKIFS", "count": 1 }, { "name": "KIT", "count": 1 }, { "name": "CEA", "count": 1 }, { "name": "Idaho National Laboratory", "count": 1 }, { "name": "Argonne National Laboratory", "count": 1 }, { "name": "ITER Organization", "count": 1 }, { "name": "French Nuclear Safety and Radiation Protection Authority (ASNR)", "count": 1 }, { "name": "Forschungszentrum Jülich", "count": 1 }, { "name": "ENEA / University of Rome \"Tor Vergata\"", "count": 1 }, { "name": "OECD Nuclear Energy Agency", "count": 1 }, { "name": "IPP & TUM student", "count": 1 }, { "name": "Kurchatov Institute", "count": 1 }]
+    },
+    {
+      "label": "Academia", "count": 24,
+      "children": [{ "name": "MIT PSFC", "count": 6 }, { "name": "EPFL", "count": 3 }, { "name": "University of Tennessee", "count": 2 }, { "name": "University of Cambridge", "count": 2 }, { "name": "Bangor University", "count": 1 }, { "name": "University of Birmingham", "count": 1 }, { "name": "UP Madrid", "count": 1 }, { "name": "Loughborough", "count": 1 }, { "name": "KIT", "count": 1 }, { "name": "HM Hochschule München University of Applied Sciences", "count": 1 }, { "name": "Ghent University", "count": 1 }, { "name": "Columbia University", "count": 1 }, { "name": "\"Tor Vergata\" University of Rome", "count": 1 }, { "name": "Eindhoven University of Technology", "count": 1 }, { "name": "Georgia Institute of Technology", "count": 1 }]
+    },
+    {
+      "label": "Other", "count": 2,
+      "children": [{ "name": "Independent", "count": 2 }]
+    }
+  ],
+  "topics": [
+    {
+      "label": "System modelling",
+      "count": 42
+    },
+    {
+      "label": "Plasma physics",
+      "count": 40
+    },
+    {
+      "label": "Open science & reproducibility",
+      "count": 35
+    },
+    {
+      "label": "Software validation & verification",
+      "count": 29
+    },
+    {
+      "label": "Neutronics",
+      "count": 23
+    },
+    {
+      "label": "Machine learning & AI",
+      "count": 21
+    },
+    {
+      "label": "Best practices",
+      "count": 20
+    },
+    {
+      "label": "Education & tutorials",
+      "count": 15
+    }
+  ],
+  "countries": [
+    { "name": "United Kingdom", "lat": 55.38, "lng": -3.44, "y2025": 54, "y2026": 35 },
+    { "name": "United States", "lat": 37.09, "lng": -95.71, "y2025": 60, "y2026": 19 },
+    { "name": "Germany", "lat": 51.17, "lng": 10.45, "y2025": 16, "y2026": 21 },
+    { "name": "Spain", "lat": 40.46, "lng": -3.75, "y2025": 14, "y2026": 7 },
+    { "name": "France", "lat": 46.6, "lng": 2.21, "y2025": 12, "y2026": 8 },
+    { "name": "Italy", "lat": 41.87, "lng": 12.57, "y2025": 13, "y2026": 7 },
+    { "name": "Netherlands", "lat": 52.13, "lng": 5.29, "y2025": 5, "y2026": 5 },
+    { "name": "Canada", "lat": 56.13, "lng": -106.35, "y2025": 6, "y2026": 1 },
+    { "name": "Russia", "lat": 61.52, "lng": 105.32, "y2025": 5, "y2026": 1 },
+    { "name": "Finland", "lat": 61.92, "lng": 25.75, "y2025": 5, "y2026": 0 },
+    { "name": "Switzerland", "lat": 46.82, "lng": 8.23, "y2025": 2, "y2026": 3 },
+    { "name": "India", "lat": 20.59, "lng": 78.96, "y2025": 2, "y2026": 2 },
+    { "name": "Luxembourg", "lat": 49.82, "lng": 6.13, "y2025": 3, "y2026": 1 },
+    { "name": "Belgium", "lat": 50.5, "lng": 4.47, "y2025": 2, "y2026": 1 },
+    { "name": "Denmark", "lat": 56.26, "lng": 9.5, "y2025": 3, "y2026": 0 },
+    { "name": "Poland", "lat": 51.92, "lng": 19.15, "y2025": 1, "y2026": 2 },
+    { "name": "Israel", "lat": 31.05, "lng": 34.85, "y2025": 2, "y2026": 0 },
+    { "name": "Slovenia", "lat": 46.15, "lng": 14.99, "y2025": 1, "y2026": 1 },
+    { "name": "Australia", "lat": -25.27, "lng": 133.77, "y2025": 1, "y2026": 0 },
+    { "name": "Austria", "lat": 47.52, "lng": 14.55, "y2025": 1, "y2026": 0 },
+    { "name": "Bangladesh", "lat": 23.68, "lng": 90.36, "y2025": 1, "y2026": 0 },
+    { "name": "Chile", "lat": -35.68, "lng": -71.54, "y2025": 0, "y2026": 1 },
+    { "name": "Greece", "lat": 39.07, "lng": 21.82, "y2025": 1, "y2026": 0 },
+    { "name": "Hungary", "lat": 47.16, "lng": 19.5, "y2025": 1, "y2026": 0 },
+    { "name": "Indonesia", "lat": -0.79, "lng": 113.92, "y2025": 1, "y2026": 0 },
+    { "name": "Ireland", "lat": 53.41, "lng": -8.24, "y2025": 0, "y2026": 1 },
+    { "name": "Japan", "lat": 36.2, "lng": 138.25, "y2025": 1, "y2026": 0 },
+    { "name": "Morocco", "lat": 31.79, "lng": -7.09, "y2025": 1, "y2026": 0 },
+    { "name": "New Zealand", "lat": -40.9, "lng": 174.89, "y2025": 1, "y2026": 0 },
+    { "name": "Pakistan", "lat": 30.38, "lng": 69.35, "y2025": 1, "y2026": 0 },
+    { "name": "Serbia", "lat": 44.02, "lng": 21.01, "y2025": 1, "y2026": 0 },
+    { "name": "Singapore", "lat": 1.35, "lng": 103.82, "y2025": 1, "y2026": 0 },
+    { "name": "Sweden", "lat": 60.13, "lng": 18.64, "y2025": 1, "y2026": 0 }
+  ],
+  "editions": [
+    {
+      "year": "2025",
+      "format": "Online",
+      "stat": "219 registrants, 31 countries, 100 abstracts"
+    },
+    {
+      "year": "2026",
+      "format": "In-person",
+      "stat": "115 attendees, 77 organisations, 105 abstracts"
+    },
+    {
+      "year": "2027",
+      "format": "Madison, WI",
+      "stat": "First US edition, organised with MIT",
+      "highlight": true
+    }
+  ],
+  "quotes": [
+    {
+      "text": "OSSFE is the most valuable event I ever visited in fusion.",
+      "source": "2026 attendee feedback"
+    },
+    {
+      "text": "I was amazed by the pace and the growth of open-source software for fusion.",
+      "source": "2026 attendee feedback"
+    },
+    {
+      "text": "Networking and exposure to the wide array of software tools.",
+      "source": "Most valuable outcome, 2026 survey"
+    },
+    {
+      "text": "You are building a long-term community. We can be ambitious, and it is in good hands.",
+      "source": "2026 attendee feedback"
+    }
+  ],
+  "previousSponsors": [
+    {
+      "name": "Proxima Fusion",
+      "logo": "images/sponsors/proxima.svg"
+    },
+    {
+      "name": "MIT PSFC",
+      "logo": "images/sponsors/psfc.svg"
+    },
+    {
+      "name": "CFS",
+      "logo": "images/sponsors/cfs.png"
+    },
+    {
+      "name": "Matplotlib Journey",
+      "logo": "images/sponsors/matplotlib_journey.png"
+    },
+    {
+      "name": "Morton Labs",
+      "logo": "images/sponsors/morton_labs.webp"
+    }
+  ],
+  "tiers": [
+    {
+      "name": "Silver",
+      "price": "$2,000",
+      "includes": null,
+      "perks": [
+        "Logo on the event website and sponsor banner",
+        "Job board listing (up to 5 roles)",
+        "Distribute merchandise to attendees",
+        "1 conference pass"
+      ],
+      "featured": false
+    },
+    {
+      "name": "Gold",
+      "price": "$5,000",
+      "includes": "Silver",
+      "perks": [
+        "Expo booth",
+        "Attendee contact list (opt-in)",
+        "1 student scholarship in your name",
+        "2 conference passes"
+      ],
+      "featured": true
+    },
+    {
+      "name": "Diamond",
+      "price": "$10,000",
+      "slots": "only 3",
+      "includes": "Gold",
+      "perks": [
+        "Premium logo placement",
+        "Top billing (listed first, named in the event title)",
+        "Logo on badges and lanyards",
+        "Offer a tutorial or talk",
+        "2 student scholarships in your name",
+        "3 conference passes"
+      ],
+      "featured": false
+    }
+  ],
+  "alaCarte": [
+    {
+      "item": "Welcome reception",
+      "price": "$3,000",
+      "summary": "Your logo at the first-evening reception, with drinks and food for every attendee."
+    },
+    {
+      "item": "Coffee & refreshment break",
+      "price": "$2,000",
+      "summary": "Your name on signage at the break (4 available), optional branded cups or napkins, plus 2 conference passes."
+    },
+    {
+      "item": "Lanyards (exclusive)",
+      "price": "$4,000",
+      "summary": "Your logo on the lanyard worn by every attendee. Includes all Silver benefits. One available."
+    },
+    {
+      "item": "Travel-grant pool",
+      "price": "any amount",
+      "summary": "Directly funds travel grants and scholarships for students and early-career researchers."
+    }
+  ],
+  "prizes": [
+    {
+      "item": "Best talk",
+      "price": "$500",
+      "sponsored": true
+    },
+    {
+      "item": "Best student talk",
+      "price": "$500",
+      "sponsored": true
+    },
+    {
+      "item": "Best open-source project",
+      "price": "$500",
+      "sponsored": true
+    }
+  ],
+  "prizeNote": "Each prize awards $400 to the winner plus $100 to their favourite open-source dependency. All three are already sponsored.",
+  "faqs": [
+    {
+      "q": "What's included with an expo booth?",
+      "a": "A table, chairs, wi-fi and power in a high-traffic common area. Sponsors handle their own shipping. Available to Gold and Diamond."
+    },
+    {
+      "q": "What is premium logo placement?",
+      "a": "Preferential treatment on all logo benefits (first, centered, larger), plus your logo on attendee badges and lanyards."
+    },
+    {
+      "q": "What is top billing?",
+      "a": "Diamond sponsors are always listed first and acknowledged as “Special Thanks to our Diamond Sponsors”."
+    },
+    {
+      "q": "How does the attendee list work?",
+      "a": "A CSV (name, email, job title, company) of attendees who opt in at registration. Gold and Diamond only."
+    },
+    {
+      "q": "How does the job board work?",
+      "a": "Your listings appear on the event website and go out by email to all attendees. Open to every sponsor tier, up to 5 roles each."
+    },
+    {
+      "q": "Who invoices us, and in what currency?",
+      "a": "OSSFE 2027 is organised with the MIT Plasma Science and Fusion Center, which handles the finances and legal side. MIT invoices in USD and payment is by wire transfer, with no deduction for taxes or fees."
+    }
+  ]
+}
