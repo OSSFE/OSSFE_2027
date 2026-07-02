@@ -15,6 +15,12 @@ const {
 ---
 
 <div id="countdown-overlay" data-reveal={revealDate}>
+  <div class="blobs">
+    <span class="blob blob-1"></span>
+    <span class="blob blob-2"></span>
+    <span class="blob blob-3"></span>
+  </div>
+
   <div class="countdown-inner">
     <div class="w-72 drop-shadow-lg md:w-[28rem]">
       <OssfeLogo />
@@ -32,44 +38,105 @@ const {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #0b1f3a; /* your brand colour */
-    color: white;
+    color: var(--color-ink);
     text-align: center;
-    font-family: system-ui, sans-serif;
+    font-family: var(--font-display);
+    overflow: hidden; /* keep blobs from spilling past edges */
+
+    /* Base gradient */
+    background: linear-gradient(
+      -45deg,
+      var(--color-ossfe-darker),
+      var(--color-ossfe-blue),
+      var(--color-ossfe-dark),
+      var(--color-ossfe-blue)
+    );
+    background-size: 400% 400%;
+    animation: gradient-shift 18s ease infinite;
   }
+
+  /* Floating blobs container */
+  .blobs {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    filter: blur(80px); /* the soft aurora glow */
+  }
+
+  .blob {
+    position: absolute;
+    width: 45vw;
+    height: 45vw;
+    border-radius: 50%;
+    opacity: 0.55;
+    will-change: transform;
+  }
+
+  .blob-1 {
+    background: var(--color-accent);
+    top: -10%;
+    left: -5%;
+    animation: drift-1 22s ease-in-out infinite;
+  }
+
+  .blob-2 {
+    background: #0ea5e9; /* bright cyan-blue accent for depth */
+    bottom: -15%;
+    right: -5%;
+    animation: drift-2 26s ease-in-out infinite;
+  }
+
+  .blob-3 {
+    background: var(--color-ossfe-blue);
+    top: 30%;
+    left: 40%;
+    opacity: 0.7;
+    animation: drift-3 30s ease-in-out infinite;
+  }
+
+  /* Keep content above the blobs */
+  .countdown-inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  @keyframes gradient-shift {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  @keyframes drift-1 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50%      { transform: translate(20vw, 15vh) scale(1.2); }
+  }
+
+  @keyframes drift-2 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50%      { transform: translate(-18vw, -12vh) scale(1.15); }
+  }
+
+  @keyframes drift-3 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50%      { transform: translate(-15vw, 18vh) scale(0.85); }
+  }
+
   #countdown-overlay h1 { font-size: 3rem; margin: 0 0 0.5rem; }
+
   #countdown-timer {
     font-size: 2.5rem;
     font-variant-numeric: tabular-nums;
     margin-top: 1rem;
+    color: var(--color-accent);
   }
+
+  #countdown-overlay p { color: var(--color-ink-muted); }
+
+  @media (prefers-reduced-motion: reduce) {
+    #countdown-overlay,
+    .blob { animation: none; }
+  }
+
   :global(body.locked) { overflow: hidden; }
 </style>
-
-<script>
-  const overlay = document.getElementById("countdown-overlay");
-  const timerEl = document.getElementById("countdown-timer");
-  const revealDate = new Date(overlay?.dataset.reveal ?? "");
-
-  function update() {
-    const diff = revealDate.getTime() - Date.now();
-
-    if (diff <= 0) {
-      overlay?.remove();
-      document.body.classList.remove("locked");
-      clearInterval(interval);
-      return;
-    }
-
-    const d = Math.floor(diff / 86400000);
-    const h = Math.floor((diff % 86400000) / 3600000);
-    const m = Math.floor((diff % 3600000) / 60000);
-    const s = Math.floor((diff % 60000) / 1000);
-
-    if (timerEl) timerEl.textContent = `${d}d ${h}h ${m}m ${s}s`;
-  }
-
-  document.body.classList.add("locked");
-  update();
-  const interval = setInterval(update, 1000);
-</script>
