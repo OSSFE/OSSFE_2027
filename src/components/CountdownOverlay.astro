@@ -27,6 +27,34 @@ const {
     </div>
     <p>{message}</p>
     <div id="countdown-timer">--</div>
+
+    <form
+      action="https://github.us9.list-manage.com/subscribe/post?u=5678d3a3e9f2ff97af6f010df&amp;id=9594bf47d2&amp;f_id=00f7e9e3f0"
+      method="post"
+      target="_blank"
+      class="remind-form mx-auto mt-8 flex max-w-md flex-col gap-3 px-6 sm:flex-row sm:px-0"
+    >
+      <input
+        type="email"
+        name="EMAIL"
+        required
+        placeholder="you@example.com"
+        class="flex-1 rounded-full border border-white/15 bg-ossfe-blue/60 px-5 py-3 font-body text-ink placeholder:text-ink-faint focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
+      />
+
+      {/* Honeypot: real users never fill this; bots do. Keep it off-screen. */}
+      <div aria-hidden="true" style="position:absolute; left:-5000px;">
+        <input type="text" name="b_5678d3a3e9f2ff97af6f010df_9594bf47d2" tabindex="-1" value="" />
+      </div>
+
+      <button
+        type="submit"
+        name="subscribe"
+        class="rounded-full bg-accent px-8 py-3 font-body font-semibold text-ossfe-darker transition hover:bg-accent-hover"
+      >
+        Remind me
+      </button>
+    </form>
   </div>
 </div>
 
