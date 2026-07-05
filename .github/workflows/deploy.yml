@@ -16,6 +16,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Regenerate the sponsor prospectus PDF from sponsors.json before the
+      # Astro build so it is picked up from public/ (pin Typst to match local).
+      - uses: typst-community/setup-typst@v5
+        with:
+          typst-version: "0.15.0"
+
+      - name: Build sponsor prospectus PDF
+        run: npm run prospectus
+
       - uses: withastro/action@v3
         with:
           node-version: 22   # installs deps, builds, uploads artifact
