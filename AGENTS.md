@@ -6,9 +6,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Marketing/landing site for OSSFE 2027 (Open Source Software for Fusion Energy
 conference), built with Astro + Tailwind CSS v4. Deployed to GitHub Pages at
-`ossfe.github.io/OSSFE_2027/` (see `astro.config.mjs` — `site`/`base` are set
+`ossfe.github.io/OSSFE_2027/` (see `astro.config.mjs`; `site`/`base` are set
 for that subpath, so internal links should be built with
 `import.meta.env.BASE_URL` rather than hardcoded absolute paths).
+
+## Writing style
+
+- **Never use em dashes (—) in any copy, code comments, or commit messages.**
+  Rewrite the sentence, or use a comma, colon, parentheses, or a period
+  instead. This applies to all user-facing text on the site.
 
 ## Development
 

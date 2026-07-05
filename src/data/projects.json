@@ -1,0 +1,29 @@
+{
+  "note": "Curated from GitHub/GitLab links submitted with OSSFE abstracts. Count reflects distinct repos referenced across submissions. Logos are shown only for actual open-source PROJECTS with a real (non-default) avatar; institutional/company orgs (e.g. ITER, UKAEA, Proxima Fusion, Tokamak Energy) are intentionally excluded from the logo wall even though their repos still count toward the total. Re-derive by re-running the extraction script against a fresh abstract export.",
+  "totalProjectCount": 59,
+  "logos": [
+    { "name": "DESC", "url": "https://github.com/PlasmaControl/DESC", "logo": "images/projects/plasmacontrol.png" },
+    { "name": "XDG", "url": "https://github.com/xdg-org/xdg", "logo": "images/projects/xdg-org.png" },
+    { "name": "Bluemira", "url": "https://github.com/Fusion-Power-Plant-Framework/bluemira", "logo": "images/projects/bluemira.png" },
+    { "name": "FEniCS", "url": "https://github.com/fenics", "logo": "images/projects/fenics.png" },
+    { "name": "Zapdos", "url": "https://github.com/shannon-lab/zapdos", "logo": "images/projects/shannon-lab.png" },
+    { "name": "MOOSE", "url": "https://github.com/idaholab/moose", "logo": "images/projects/idaholab.png" },
+    { "name": "FESTIM", "url": "https://github.com/festim-dev", "logo": "images/projects/festim-dev.png" },
+    { "name": "Pelican Platform", "url": "https://github.com/PelicanPlatform/pelican", "logo": "images/projects/pelicanplatform.png" },
+    { "name": "CVMFS", "url": "https://github.com/cvmfs/cvmfs", "logo": "images/projects/cvmfs.png" },
+    { "name": "NukeHub", "url": "https://github.com/nukehub-dev", "logo": "images/projects/nukehub-dev.png" },
+    { "name": "LIBRA", "url": "https://github.com/LIBRA-project/ngen_characterization", "logo": "images/projects/libra-project.png" },
+    { "name": "Gysela-X", "url": "https://github.com/gyselax/gyselalibxx", "logo": "images/projects/gyselax.png" },
+    { "name": "Open FUSION Toolkit", "url": "https://github.com/OpenFUSIONToolkit/OpenFUSIONToolkit", "logo": "images/projects/openfusiontoolkit.png" },
+    { "name": "Kepler", "url": "https://github.com/sustainable-computing-io/kepler", "logo": "images/projects/kepler.png" },
+    { "name": "FUSE", "url": "https://github.com/ProjectTorreyPines/FUSE.jl", "logo": "images/projects/projecttorreypines.png" },
+    { "name": "MDSplus", "url": "https://github.com/MDSplus/mdsplus", "logo": "images/projects/mdsplus.png" },
+    { "name": "ElmerFEM", "url": "https://github.com/ElmerCSC/elmerfem", "logo": "images/projects/elmercsc.png" },
+    { "name": "Struphy", "url": "https://github.com/struphy-hub/struphy", "logo": "images/projects/struphy-hub.png" },
+    { "name": "TokaLab", "url": "https://github.com/TokaLab", "logo": "images/projects/tokalab.png" },
+    { "name": "OpenMC", "url": "https://github.com/openmc-dev/openmc", "logo": "images/projects/openmc-dev.png" },
+    { "name": "Simsopt", "url": "https://github.com/hiddenSymmetries/simsopt", "logo": "images/projects/hiddensymmetries.png" },
+    { "name": "CadQuery", "url": "https://github.com/CadQuery/cadquery", "logo": "images/projects/cadquery.png" },
+    { "name": "CoSApp", "url": "https://gitlab.com/cosapp/cosapp", "logo": "images/projects/cosapp.png" }
+  ]
+}

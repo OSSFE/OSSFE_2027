@@ -3,6 +3,7 @@
 import Base from "../layouts/Base.astro";
 import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
+import EcosystemShowcase from "../components/EcosystemShowcase.astro";
 import data from "../data/sponsors.json";
 
 const base = import.meta.env.BASE_URL;
@@ -118,6 +119,13 @@ const pctOf = (n: number) => Math.round((n / audTotal) * 100);
       </div>
     </div>
   </section>
+
+  <!-- WHAT YOUR SPONSORSHIP SUSTAINS -->
+  <EcosystemShowcase
+    variant="dark"
+    eyebrow="What your sponsorship sustains"
+    intro="Every tier below helps sustain the open-source stack the fusion community runs on. Sponsoring OSSFE supports all of these projects at once, not just one."
+  />
 
   <!-- PROOF: FEEDBACK STATS -->
   <section class="bg-ossfe-dark py-20">
