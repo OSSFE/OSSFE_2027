@@ -53,7 +53,11 @@ type-check `.astro`/`.ts` files against `tsconfig.json` (extends
   in `<Base>`.
 - `src/components/CountdownOverlay.astro` — full-screen overlay with its own
   client-side timer that hides the site until a `revealDate` passes (used in
-  `Base.astro` to hide the 2027 event location until it's announced).
+  `Base.astro` to hide the 2027 event location until it's announced). Preview
+  backdoor: visiting any page with `?preview=fusion` unlocks the site for devs
+  or invited sponsors and remembers it in `localStorage` (use `?preview=off` to
+  re-lock). This is obfuscation, not real security: the token ships in the
+  client JS, so don't rely on it to hide anything truly sensitive.
 - `src/data/sponsors.json` — single source of truth for both
   `src/pages/sponsors.astro` (the `/sponsors` web page) and
   `prospectus/prospectus.typ` (the downloadable sponsor prospectus PDF, built
