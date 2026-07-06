@@ -174,12 +174,41 @@ const {
   const timerEl = document.getElementById("countdown-timer");
   const revealDate = new Date(overlay?.dataset.reveal ?? "");
 
+  /*
+   * Preview backdoor: lets devs and invited sponsors see the site before the
+   * public reveal. Visiting any page with `?preview=fusion` unlocks the site
+   * and remembers the choice in localStorage, so subsequent navigation and
+   * return visits stay unlocked. Use `?preview=off` to re-lock (e.g. to test
+   * the overlay). This is obfuscation, not real security: anyone who knows the
+   * token can get in, which is fine for a "not yet announced" teaser.
+   */
+  const PREVIEW_TOKEN = "fusion";
+  const STORAGE_KEY = "ossfe-preview";
+
+  const params = new URLSearchParams(window.location.search);
+  const previewParam = params.get("preview");
+
+  if (previewParam === "off") {
+    try { localStorage.removeItem(STORAGE_KEY); } catch {}
+  } else if (previewParam === PREVIEW_TOKEN) {
+    try { localStorage.setItem(STORAGE_KEY, "1"); } catch {}
+  }
+
+  let previewUnlocked = false;
+  try { previewUnlocked = localStorage.getItem(STORAGE_KEY) === "1"; } catch {}
+
+  let interval: ReturnType<typeof setInterval>;
+
+  function reveal() {
+    overlay?.remove();
+    document.body.classList.remove("locked");
+  }
+
   function update() {
     const diff = revealDate.getTime() - Date.now();
 
     if (diff <= 0) {
-      overlay?.remove();
-      document.body.classList.remove("locked");
+      reveal();
       clearInterval(interval);
       return;
     }
@@ -192,7 +221,11 @@ const {
     if (timerEl) timerEl.textContent = `${d}d ${h}h ${m}m ${s}s`;
   }
 
-  document.body.classList.add("locked");
-  update();
-  const interval = setInterval(update, 1000);
+  if (previewUnlocked) {
+    reveal();
+  } else {
+    document.body.classList.add("locked");
+    update();
+    interval = setInterval(update, 1000);
+  }
 </script>
