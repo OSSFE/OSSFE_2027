@@ -1,0 +1,180 @@
+---
+// src/components/ExitIntent.astro
+// A once-per-visitor prompt to follow OSSFE, shown when a visitor is about to
+// leave. Desktop: fires on exit-intent (cursor leaving toward the browser
+// chrome). Mobile (no hover): fires after scrolling ~60% of the page. It never
+// re-shows once seen or dismissed (localStorage), and stays disarmed while the
+// countdown overlay is still locking the site. Email form reuses the same
+// Mailchimp endpoint as FinalCTA / CountdownOverlay.
+---
+
+<div
+  id="exit-intent"
+  class="fixed inset-0 z-[9990] hidden items-center justify-center p-4"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="exit-intent-title"
+>
+  {/* Backdrop */}
+  <div id="exit-intent-backdrop" class="absolute inset-0 bg-ossfe-darker/80 backdrop-blur-sm"></div>
+
+  {/* Card */}
+  <div class="relative w-full max-w-md rounded-2xl bg-ossfe-dark p-8 text-center shadow-2xl ring-1 ring-white/10">
+    <button
+      id="exit-intent-close"
+      type="button"
+      aria-label="Close"
+      class="absolute right-4 top-4 text-ink-faint transition hover:text-ink"
+    >
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-5 w-5" aria-hidden="true">
+        <path stroke-linecap="round" d="M6 6l12 12M18 6L6 18" />
+      </svg>
+    </button>
+
+    <p class="font-body text-sm uppercase tracking-widest text-accent">Before you go</p>
+    <h2 id="exit-intent-title" class="mt-3 font-display text-3xl text-ink">
+      Don't miss OSSFE 2027
+    </h2>
+    <p class="mx-auto mt-3 max-w-sm font-body text-sm text-ink-muted">
+      Be first to hear when the CFP opens, tickets go live, and speakers are
+      announced. Pick whichever suits you.
+    </p>
+
+    <a
+      href="https://www.linkedin.com/company/ossfe"
+      target="_blank"
+      rel="noopener"
+      class="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#0a66c2] px-6 py-3 font-body font-semibold text-ink transition hover:brightness-110"
+    >
+      <svg viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5" aria-hidden="true">
+        <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/>
+      </svg>
+      Follow on LinkedIn
+    </a>
+
+    <div class="my-5 flex items-center gap-3">
+      <span class="h-px flex-1 bg-white/10"></span>
+      <span class="font-body text-xs uppercase tracking-widest text-ink-faint">or</span>
+      <span class="h-px flex-1 bg-white/10"></span>
+    </div>
+
+    <form
+      action="https://github.us9.list-manage.com/subscribe/post?u=5678d3a3e9f2ff97af6f010df&amp;id=9594bf47d2&amp;f_id=00f7e9e3f0"
+      method="post"
+      target="_blank"
+      class="flex flex-col gap-3 sm:flex-row"
+    >
+      <input
+        type="email"
+        name="EMAIL"
+        required
+        placeholder="you@example.com"
+        class="flex-1 rounded-full border border-white/15 bg-ossfe-blue/60 px-5 py-3 font-body text-ink placeholder:text-ink-faint focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
+      />
+
+      {/* Honeypot: real users never fill this; bots do. Keep it off-screen. */}
+      <div aria-hidden="true" style="position:absolute; left:-5000px;">
+        <input type="text" name="b_5678d3a3e9f2ff97af6f010df_9594bf47d2" tabindex="-1" value="" />
+      </div>
+
+      <button
+        type="submit"
+        name="subscribe"
+        class="rounded-full bg-accent px-6 py-3 font-body font-semibold text-ossfe-darker transition hover:bg-accent-hover"
+      >
+        Notify me
+      </button>
+    </form>
+  </div>
+</div>
+
+<script>
+  const modal = document.getElementById("exit-intent");
+  const backdrop = document.getElementById("exit-intent-backdrop");
+  const closeBtn = document.getElementById("exit-intent-close");
+
+  const STORAGE_KEY = "ossfe-exit-intent-seen";
+
+  // Dev/test shortcut: `?exit=reset` forgets that the popup was already shown so
+  // it can be triggered again without clearing localStorage by hand.
+  if (new URLSearchParams(window.location.search).get("exit") === "reset") {
+    try { localStorage.removeItem(STORAGE_KEY); } catch {}
+  }
+
+  let seen = false;
+  try { seen = localStorage.getItem(STORAGE_KEY) === "1"; } catch {}
+
+  // Respect visitors who asked not to be nudged, and skip if the markup is
+  // absent for any reason.
+  if (modal && !seen) {
+    let shown = false;
+
+    function markSeen() {
+      try { localStorage.setItem(STORAGE_KEY, "1"); } catch {}
+    }
+
+    function show() {
+      if (shown) return;
+      // Never surface it while the countdown overlay is still locking the site;
+      // that overlay already has its own capture.
+      if (document.getElementById("countdown-overlay")) return;
+      shown = true;
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+      markSeen();
+      teardown();
+    }
+
+    function hide() {
+      modal.classList.add("hidden");
+      modal.classList.remove("flex");
+    }
+
+    // Desktop exit-intent: cursor leaves the viewport through the top edge.
+    function onMouseOut(e: MouseEvent) {
+      if (e.clientY <= 0 && !e.relatedTarget) show();
+    }
+
+    // Touch / no-hover devices have no exit-intent, so use scroll depth: once
+    // the visitor has read ~60% of the page they've shown real interest.
+    function onScroll() {
+      const scrolled = window.scrollY + window.innerHeight;
+      const depth = scrolled / document.documentElement.scrollHeight;
+      if (depth >= 0.6) show();
+    }
+
+    const canHover = window.matchMedia("(hover: hover)").matches;
+
+    function teardown() {
+      document.removeEventListener("mouseout", onMouseOut);
+      window.removeEventListener("scroll", onScroll);
+    }
+
+    function arm() {
+      if (canHover) {
+        document.addEventListener("mouseout", onMouseOut);
+      } else {
+        window.addEventListener("scroll", onScroll, { passive: true });
+      }
+    }
+
+    closeBtn?.addEventListener("click", hide);
+    backdrop?.addEventListener("click", hide);
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") hide();
+    });
+
+    // The overlay removes itself on reveal / preview-unlock; only arm once the
+    // site is actually visible. Poll briefly for that to happen.
+    if (document.getElementById("countdown-overlay")) {
+      const t = setInterval(() => {
+        if (!document.getElementById("countdown-overlay")) {
+          clearInterval(t);
+          arm();
+        }
+      }, 500);
+    } else {
+      arm();
+    }
+  }
+</script>
