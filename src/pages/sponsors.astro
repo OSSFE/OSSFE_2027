@@ -4,6 +4,7 @@ import Base from "../layouts/Base.astro";
 import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
 import EcosystemShowcase from "../components/EcosystemShowcase.astro";
+import Icon from "../components/Icon.astro";
 import data from "../data/sponsors.json";
 
 const base = import.meta.env.BASE_URL;
@@ -94,23 +95,23 @@ const pctOf = (n: number) => Math.round((n / audTotal) * 100);
         {
           [
             {
-              icon: "🎯",
+              icon: "target",
               t: "Reach a niche audience",
               b: "Direct access to fusion software engineers, scientists and decision-makers you can’t easily reach elsewhere.",
             },
             {
-              icon: "🧲",
+              icon: "magnet",
               t: "Find rare talent",
               b: "Meet and recruit specialists at the intersection of fusion, scientific computing and open source.",
             },
             {
-              icon: "🌱",
+              icon: "sprout",
               t: "Make real impact",
               b: "Your support funds travel grants, scholarships and the open-source tools the community depends on.",
             },
           ].map((c) => (
             <div class="flex h-full flex-col rounded-2xl bg-ossfe-dark/60 p-8 ring-1 ring-white/5">
-              <div class="text-3xl">{c.icon}</div>
+              <Icon name={c.icon} class="h-8 w-8 text-accent" />
               <h3 class="mt-4 font-display text-xl text-ink">{c.t}</h3>
               <p class="mt-2 font-body text-sm text-ink-faint">{c.b}</p>
             </div>

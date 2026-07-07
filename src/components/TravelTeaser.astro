@@ -1,10 +1,11 @@
 ---
 // src/components/TravelTeaser.astro
+import Icon from './Icon.astro';
 const infoCards = [
-  { icon: '🏨', title: 'Hotels & lodging', body: 'Discounted room blocks near the venue, booking details coming soon.' },
-  { icon: '✈️', title: 'Getting there', body: 'Madison (MSN) airport, with Chicago (ORD/MDW) a few hours away by road or rail.' },
-  { icon: '📄', title: 'Visa & invitation letters', body: 'Travelling internationally? We provide invitation letters on request.' },
-  { icon: '👨‍👩‍👧', title: 'Family & accessibility', body: 'Family support, a nursing room and accessible facilities: just ask.' },
+  { icon: 'bed', title: 'Hotels & lodging', body: 'Discounted room blocks near the venue, booking details coming soon.' },
+  { icon: 'plane', title: 'Getting there', body: 'Madison (MSN) airport, with Chicago (ORD/MDW) a few hours away by road or rail.' },
+  { icon: 'document', title: 'Visa & invitation letters', body: 'Travelling internationally? We provide invitation letters on request.' },
+  { icon: 'accessibility', title: 'Family & accessibility', body: 'Family support, a nursing room and accessible facilities: just ask.' },
 ];
 const base = import.meta.env.BASE_URL;
 ---
@@ -26,7 +27,7 @@ const base = import.meta.env.BASE_URL;
         <div class="mt-10 grid gap-4 sm:grid-cols-2">
           {infoCards.map((c) => (
             <div class="rounded-2xl bg-ossfe-dark/60 p-5 ring-1 ring-white/5">
-              <div class="text-2xl">{c.icon}</div>
+              <Icon name={c.icon} class="h-7 w-7 text-accent" />
               <h3 class="mt-3 font-display text-lg text-ink">{c.title}</h3>
               <p class="mt-1 font-body text-sm text-ink-faint">{c.body}</p>
             </div>
