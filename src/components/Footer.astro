@@ -2,11 +2,11 @@
 // src/components/Footer.astro
 const base = import.meta.env.BASE_URL;
 const nav = [
-  { href: '#about', label: 'About' },
-  { href: '#cfp', label: 'Call for Proposals' },
-  { href: '#program', label: 'Program' },
-  { href: '#sponsors', label: 'Sponsors' },
-  { href: '#travel', label: 'Travel' },
+  { href: `${base}#about`, label: 'About' },
+  { href: `${base}#cfp`, label: 'Call for Proposals' },
+  { href: `${base}#program`, label: 'Program' },
+  { href: `${base}#sponsors`, label: 'Sponsors' },
+  { href: `${base}#travel`, label: 'Travel' },
 ];
 const socials = [
   { href: 'https://www.youtube.com/watch?v=pcuDrO1bBdU', label: 'YouTube' },
