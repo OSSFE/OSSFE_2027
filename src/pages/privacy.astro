@@ -6,7 +6,7 @@ import Footer from "../components/Footer.astro";
 
 const contact = "privacy@ossfe.org";
 // Update when the policy text changes.
-const updated = "6 July 2026";
+const updated = "7 July 2026";
 ---
 
 <Base title="Privacy Notice · OSSFE 2027">
@@ -52,15 +52,17 @@ const updated = "6 July 2026";
           What we collect and why
         </h2>
         <p class="mt-4 font-body text-ink-muted">
-          <strong class="text-ink">Analytics.</strong> With your consent, we use
-          Google Analytics to understand how visitors use this site (for example,
-          which pages are viewed and roughly where visitors are located). This
-          helps us improve the site and plan the event. Google Analytics sets
-          cookies and processes information such as your IP address and browser.
-          We do not load Google Analytics, and no analytics cookies are set,
-          unless you click "Accept" on the cookie banner. You can change or
-          withdraw your choice at any time using the "Cookie settings" link in
-          the footer.
+          <strong class="text-ink">Analytics.</strong> We use Google Analytics to
+          understand how visitors use this site (for example, which pages are
+          viewed and roughly where visitors are located). This helps us improve
+          the site and plan the event. We run Google Analytics with Google
+          Consent Mode v2: until you click "Accept" on the cookie banner, it
+          operates in a cookieless mode that sets no cookies and stores no
+          identifiers on your device, sending only anonymous, aggregated
+          measurement data. If you click "Accept", Google Analytics sets cookies
+          and processes information such as your IP address and browser for
+          fuller measurement. You can change or withdraw your choice at any time
+          using the "Cookie settings" link in the footer.
         </p>
         <p class="mt-4 font-body text-ink-muted">
           <strong class="text-ink">Registration.</strong> Conference
@@ -93,7 +95,7 @@ const updated = "6 July 2026";
         <ul class="mt-4 space-y-2">
           {
             [
-              "Google, which provides Google Analytics (only if you consent to analytics cookies).",
+              "Google, which provides Google Analytics (in cookieless mode by default, and with cookies only if you accept analytics cookies).",
               "Pretix (rami.io GmbH), which provides conference registration and ticketing.",
               "GitHub, which hosts this website via GitHub Pages and processes standard server request logs.",
             ].map((item) => (
@@ -110,11 +112,13 @@ const updated = "6 July 2026";
         <h2 class="font-display text-2xl text-accent">Cookies</h2>
         <p class="mt-4 font-body text-ink-muted">
           This site does not set analytics or advertising cookies unless you
-          accept them. If you accept, Google Analytics sets cookies to measure
-          site usage. We also store your consent choice in your browser's local
-          storage so we do not ask you again on every visit. You can revisit or
-          reverse your choice through the "Cookie settings" link in the footer,
-          or by clearing this site's data in your browser.
+          accept them. Until then, Google Analytics runs in a cookieless mode
+          that stores nothing on your device. If you accept, Google Analytics
+          sets cookies to measure site usage. We also store your consent choice
+          in your browser's local storage so we do not ask you again on every
+          visit. You can revisit or reverse your choice through the "Cookie
+          settings" link in the footer, or by clearing this site's data in your
+          browser.
         </p>
       </section>
 

@@ -1,7 +1,10 @@
 ---
 // src/components/ConsentBanner.astro
-// Consent-gated Google Analytics loader. GA is NOT loaded until the visitor
-// clicks "Accept", so no cookies or requests go to Google without consent.
+// Google Analytics with Consent Mode v2. GA loads on every page, but all
+// consent signals default to "denied", so until the visitor accepts GA only
+// sends cookieless "modeled" pings: no cookies are set and no identifiers are
+// stored on the device. Clicking "Accept" flips analytics_storage to
+// "granted" (full tracking); "Decline" keeps the cookieless mode.
 // The choice is remembered in localStorage; `window.ossfeCookieSettings()`
 // reopens the banner so consent can be changed or withdrawn.
 const { measurementId } = Astro.props;
@@ -22,8 +25,8 @@ const base = import.meta.env.BASE_URL;
       class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between"
     >
       <p class="font-body text-sm text-ink-muted">
-        We use Google Analytics to understand how people use this site. It only
-        sets cookies if you accept. See our
+        We use Google Analytics to understand how people use this site. Until you
+        accept, we only collect anonymous, cookieless usage data. See our
         <a
           href={`${base}privacy`}
           class="text-accent underline underline-offset-2 hover:text-accent-hover"
@@ -52,36 +55,45 @@ const base = import.meta.env.BASE_URL;
   const KEY = "ossfe-analytics-consent";
   const banner = document.getElementById("consent-banner");
 
-  function loadGA() {
-    if (window.__ossfeGaLoaded) return;
-    window.__ossfeGaLoaded = true;
-    const s = document.createElement("script");
-    s.async = true;
-    s.src = "https://www.googletagmanager.com/gtag/js?id=" + measurementId;
-    document.head.appendChild(s);
-    window.dataLayer = window.dataLayer || [];
-    window.gtag = function () {
-      window.dataLayer.push(arguments);
-    };
-    window.gtag("js", new Date());
-    window.gtag("config", measurementId);
-  }
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function () {
+    window.dataLayer.push(arguments);
+  };
+
+  // Set consent defaults BEFORE GA loads. Everything starts denied, so GA runs
+  // in cookieless "modeled" mode until (and unless) the visitor accepts. If a
+  // previous visit accepted, restore analytics_storage as granted up front.
+  const choice = localStorage.getItem(KEY);
+  gtag("consent", "default", {
+    ad_storage: "denied",
+    ad_user_data: "denied",
+    ad_personalization: "denied",
+    analytics_storage: choice === "granted" ? "granted" : "denied",
+  });
+
+  // Load GA on every page. With consent denied it sends cookieless pings only.
+  const s = document.createElement("script");
+  s.async = true;
+  s.src = "https://www.googletagmanager.com/gtag/js?id=" + measurementId;
+  document.head.appendChild(s);
+  gtag("js", new Date());
+  gtag("config", measurementId);
 
   const show = () => banner.classList.remove("hidden");
   const hide = () => banner.classList.add("hidden");
 
-  const choice = localStorage.getItem(KEY);
-  if (choice === "granted") loadGA();
-  else if (choice !== "denied") show();
+  // Show the banner only if the visitor has not chosen yet.
+  if (choice !== "granted" && choice !== "denied") show();
 
   document.getElementById("consent-accept").addEventListener("click", () => {
     localStorage.setItem(KEY, "granted");
     hide();
-    loadGA();
+    gtag("consent", "update", { analytics_storage: "granted" });
   });
   document.getElementById("consent-decline").addEventListener("click", () => {
     localStorage.setItem(KEY, "denied");
     hide();
+    gtag("consent", "update", { analytics_storage: "denied" });
   });
 
   // Let a "Cookie settings" link reopen the banner to change/withdraw consent.

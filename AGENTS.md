@@ -51,9 +51,11 @@ type-check `.astro`/`.ts` files against `tsconfig.json` (extends
 - `src/layouts/Base.astro` — shared HTML shell (head/meta/OG tags, global CSS
   import, `CountdownOverlay`, `ConsentBanner`). Every page wraps its content
   in `<Base>`.
-- `src/components/ConsentBanner.astro` — consent-gated Google Analytics. GA is
-  not loaded until the visitor clicks "Accept" (prior blocking, so no cookies
-  or requests reach Google without consent); the choice is stored in
+- `src/components/ConsentBanner.astro` — Google Analytics with Consent Mode v2.
+  GA loads on every page, but all consent signals default to "denied", so until
+  the visitor accepts GA only sends cookieless "modeled" pings (no cookies, no
+  identifiers stored). "Accept" flips `analytics_storage` to "granted" (full
+  tracking); "Decline" keeps the cookieless mode. The choice is stored in
   `localStorage`. `window.ossfeCookieSettings()` reopens the banner to change or
   withdraw consent (wired to the footer's "Cookie settings" button).
 - `src/components/CountdownOverlay.astro` — full-screen overlay with its own
