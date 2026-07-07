@@ -1,0 +1,89 @@
+---
+// src/components/ConsentBanner.astro
+// Consent-gated Google Analytics loader. GA is NOT loaded until the visitor
+// clicks "Accept", so no cookies or requests go to Google without consent.
+// The choice is remembered in localStorage; `window.ossfeCookieSettings()`
+// reopens the banner so consent can be changed or withdrawn.
+const { measurementId } = Astro.props;
+const base = import.meta.env.BASE_URL;
+---
+
+<div
+  id="consent-banner"
+  class="fixed inset-x-0 bottom-0 z-[10000] hidden"
+  role="dialog"
+  aria-label="Cookie consent"
+  aria-live="polite"
+>
+  <div
+    class="mx-auto m-4 max-w-4xl rounded-2xl bg-ossfe-dark p-6 shadow-2xl ring-1 ring-white/10"
+  >
+    <div
+      class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between"
+    >
+      <p class="font-body text-sm text-ink-muted">
+        We use Google Analytics to understand how people use this site. It only
+        sets cookies if you accept. See our
+        <a
+          href={`${base}privacy`}
+          class="text-accent underline underline-offset-2 hover:text-accent-hover"
+          >privacy notice</a
+        >.
+      </p>
+      <div class="flex shrink-0 gap-3">
+        <button
+          id="consent-decline"
+          type="button"
+          class="rounded-full border border-ink/30 px-6 py-2 font-semibold text-ink transition hover:border-ink hover:bg-ink/10"
+          >Decline</button
+        >
+        <button
+          id="consent-accept"
+          type="button"
+          class="rounded-full bg-accent px-6 py-2 font-semibold text-ossfe-darker transition hover:bg-accent-hover"
+          >Accept</button
+        >
+      </div>
+    </div>
+  </div>
+</div>
+
+<script define:vars={{ measurementId }}>
+  const KEY = "ossfe-analytics-consent";
+  const banner = document.getElementById("consent-banner");
+
+  function loadGA() {
+    if (window.__ossfeGaLoaded) return;
+    window.__ossfeGaLoaded = true;
+    const s = document.createElement("script");
+    s.async = true;
+    s.src = "https://www.googletagmanager.com/gtag/js?id=" + measurementId;
+    document.head.appendChild(s);
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () {
+      window.dataLayer.push(arguments);
+    };
+    window.gtag("js", new Date());
+    window.gtag("config", measurementId);
+  }
+
+  const show = () => banner.classList.remove("hidden");
+  const hide = () => banner.classList.add("hidden");
+
+  const choice = localStorage.getItem(KEY);
+  if (choice === "granted") loadGA();
+  else if (choice !== "denied") show();
+
+  document.getElementById("consent-accept").addEventListener("click", () => {
+    localStorage.setItem(KEY, "granted");
+    hide();
+    loadGA();
+  });
+  document.getElementById("consent-decline").addEventListener("click", () => {
+    localStorage.setItem(KEY, "denied");
+    hide();
+  });
+
+  // Let a "Cookie settings" link reopen the banner to change/withdraw consent.
+  window.ossfeCookieSettings = show;
+</script>

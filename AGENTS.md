@@ -49,8 +49,13 @@ type-check `.astro`/`.ts` files against `tsconfig.json` (extends
   component list in `src/pages/index.astro` rather than the components
   themselves.
 - `src/layouts/Base.astro` — shared HTML shell (head/meta/OG tags, global CSS
-  import, Google Analytics, `CountdownOverlay`). Every page wraps its content
+  import, `CountdownOverlay`, `ConsentBanner`). Every page wraps its content
   in `<Base>`.
+- `src/components/ConsentBanner.astro` — consent-gated Google Analytics. GA is
+  not loaded until the visitor clicks "Accept" (prior blocking, so no cookies
+  or requests reach Google without consent); the choice is stored in
+  `localStorage`. `window.ossfeCookieSettings()` reopens the banner to change or
+  withdraw consent (wired to the footer's "Cookie settings" button).
 - `src/components/CountdownOverlay.astro` — full-screen overlay with its own
   client-side timer that hides the site until a `revealDate` passes (used in
   `Base.astro` to hide the 2027 event location until it's announced). Preview

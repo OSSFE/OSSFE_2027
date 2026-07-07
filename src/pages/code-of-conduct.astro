@@ -1,0 +1,121 @@
+---
+// src/pages/code-of-conduct.astro
+import Base from "../layouts/Base.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+
+const contact = "conduct@ossfe.org";
+
+const sections = [
+  {
+    heading: "Our pledge",
+    body: [
+      "OSSFE is dedicated to providing a harassment-free, welcoming and inclusive experience for everyone, regardless of gender, gender identity and expression, sexual orientation, disability, physical appearance, body size, race, ethnicity, nationality, age, religion, or level of experience.",
+      "We do not tolerate harassment of participants in any form. This code of conduct applies to all OSSFE spaces, including talks, workshops, social events, chat channels, and online platforms, both in person and virtual.",
+    ],
+  },
+  {
+    heading: "Expected behaviour",
+    body: [
+      "All participants, speakers, sponsors, organisers and volunteers are expected to:",
+    ],
+    list: [
+      "Be considerate, respectful and collaborative.",
+      "Refrain from demeaning, discriminatory or harassing behaviour and speech.",
+      "Be mindful of your fellow participants and alert organisers if you notice a dangerous situation or someone in distress.",
+      "Respect the rules and policies of the venue and platforms we use.",
+    ],
+  },
+  {
+    heading: "Unacceptable behaviour",
+    body: [
+      "Harassment includes, but is not limited to:",
+    ],
+    list: [
+      "Offensive comments related to gender, gender identity and expression, sexual orientation, disability, physical appearance, body size, race, ethnicity, nationality, age or religion.",
+      "Deliberate intimidation, stalking or following.",
+      "Unwelcome sexual attention or advances, and sustained disruption of talks or other events.",
+      "Photography, audio or video recording of a person without their consent.",
+      "Advocating for, or encouraging, any of the above behaviour.",
+    ],
+  },
+  {
+    heading: "Reporting",
+    body: [
+      `If you are being harassed, notice that someone else is being harassed, or have any other concerns, please contact a member of the conference staff immediately, or email us at ${contact}.`,
+      "Conference staff can be identified by their badges and will be happy to help participants contact venue security or local law enforcement, provide escorts, or otherwise assist those experiencing harassment to feel safe for the duration of the event. Reports will be handled with discretion.",
+    ],
+  },
+  {
+    heading: "Consequences",
+    body: [
+      "Participants asked to stop any harassing behaviour are expected to comply immediately. If a participant engages in harassing behaviour, the organisers may take any action they deem appropriate, up to and including a warning or expulsion from the conference with no refund.",
+    ],
+  },
+  {
+    heading: "Attribution",
+    body: [
+      "This code of conduct is adapted from the Conference Code of Conduct (confcodeofconduct.com) and the Contributor Covenant, and is licensed under a Creative Commons Attribution licence.",
+    ],
+  },
+];
+---
+
+<Base title="Code of Conduct · OSSFE 2027">
+  <Nav />
+
+  <header class="bg-ossfe-blue pt-32 pb-16">
+    <div class="mx-auto max-w-3xl px-6 text-center">
+      <p class="font-body text-sm uppercase tracking-widest text-accent">
+        OSSFE 2027
+      </p>
+      <h1 class="mt-3 font-display text-5xl text-ink md:text-6xl">
+        Code of Conduct
+      </h1>
+      <p class="mx-auto mt-6 max-w-2xl font-body text-lg text-ink-muted">
+        OSSFE is committed to a safe, respectful and inclusive event for
+        everyone. Here is what we expect, and how to reach us if something
+        goes wrong.
+      </p>
+    </div>
+  </header>
+
+  <main class="bg-ossfe-dark py-16">
+    <div class="mx-auto max-w-3xl space-y-12 px-6">
+      {
+        sections.map((s) => (
+          <section>
+            <h2 class="font-display text-2xl text-accent">{s.heading}</h2>
+            {s.body.map((p) => (
+              <p class="mt-4 font-body text-ink-muted">{p}</p>
+            ))}
+            {s.list && (
+              <ul class="mt-4 space-y-2">
+                {s.list.map((item) => (
+                  <li class="flex items-start gap-3 font-body text-ink-muted">
+                    <span class="mt-1 text-accent">▸</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </section>
+        ))
+      }
+
+      <div class="rounded-2xl bg-ossfe-blue/60 p-8 text-center ring-1 ring-white/5">
+        <p class="font-body text-ink-muted">
+          Need to report something, or have a question about this policy?
+        </p>
+        <a
+          href={`mailto:${contact}`}
+          class="mt-4 inline-block rounded-full bg-accent px-8 py-3 font-semibold text-ossfe-darker transition hover:bg-accent-hover"
+        >
+          {contact}
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Base>

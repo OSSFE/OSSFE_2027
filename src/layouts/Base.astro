@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import GoogleAnalytics from '../components/GoogleAnalytics.astro';
+import ConsentBanner from '../components/ConsentBanner.astro';
 const { title = 'OSSFE 2027 — Open Source Software for Fusion Energy' } = Astro.props;
 const base = import.meta.env.BASE_URL;
 
@@ -18,7 +18,6 @@ import CountdownOverlay from "../components/CountdownOverlay.astro";
     <meta property="og:description" content="OSSFE 2027 — the conference for open-source software in fusion energy. Location to be announced." />
     <meta property="og:image" content={new URL(`${base}media/hero-poster.jpg`, Astro.site)} />
     <link rel="icon" href={`${base}favicon.svg?v=3`} type="image/svg+xml" />
-    <GoogleAnalytics measurementId="G-7TN8952B6L" />
   </head>
   <body class="bg-ossfe-blue font-body text-ink antialiased">
     <slot />
@@ -26,3 +25,4 @@ import CountdownOverlay from "../components/CountdownOverlay.astro";
 </html>
 
 <CountdownOverlay revealDate="2026-07-31T00:00:00Z" />
+<ConsentBanner measurementId="G-7TN8952B6L" />

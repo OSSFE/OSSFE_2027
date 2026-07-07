@@ -58,8 +58,9 @@ const year = new Date().getFullYear();
     <div class="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 sm:flex-row">
       <p class="font-body text-xs text-ink-faint">© {year} OSSFE. All rights reserved.</p>
       <div class="flex gap-6">
-        <a href="/code-of-conduct" class="font-body text-xs text-ink-faint transition hover:text-ink">Code of Conduct</a>
-        <a href="/privacy" class="font-body text-xs text-ink-faint transition hover:text-ink">Privacy</a>
+        <a href={`${base}code-of-conduct`} class="font-body text-xs text-ink-faint transition hover:text-ink">Code of Conduct</a>
+        <a href={`${base}privacy`} class="font-body text-xs text-ink-faint transition hover:text-ink">Privacy</a>
+        <button type="button" onclick="window.ossfeCookieSettings && window.ossfeCookieSettings()" class="font-body text-xs text-ink-faint transition hover:text-ink">Cookie settings</button>
       </div>
     </div>
   </div>

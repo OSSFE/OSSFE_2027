@@ -1,0 +1,174 @@
+---
+// src/pages/privacy.astro
+import Base from "../layouts/Base.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+
+const contact = "privacy@ossfe.org";
+// Update when the policy text changes.
+const updated = "6 July 2026";
+---
+
+<Base title="Privacy Notice · OSSFE 2027">
+  <Nav />
+
+  <header class="bg-ossfe-blue pt-32 pb-16">
+    <div class="mx-auto max-w-3xl px-6 text-center">
+      <p class="font-body text-sm uppercase tracking-widest text-accent">
+        OSSFE 2027
+      </p>
+      <h1 class="mt-3 font-display text-5xl text-ink md:text-6xl">
+        Privacy Notice
+      </h1>
+      <p class="mx-auto mt-6 max-w-2xl font-body text-lg text-ink-muted">
+        What we collect when you use this site or register for the conference,
+        why, and the choices you have.
+      </p>
+      <p class="mt-4 font-body text-sm text-ink-faint">
+        Last updated {updated}
+      </p>
+    </div>
+  </header>
+
+  <main class="bg-ossfe-dark py-16">
+    <div class="mx-auto max-w-3xl space-y-12 px-6">
+      <section>
+        <h2 class="font-display text-2xl text-accent">Who we are</h2>
+        <p class="mt-4 font-body text-ink-muted">
+          OSSFE (Open Source Software for Fusion Energy) 2027 is organised by
+          the Massachusetts Institute of Technology (MIT). This notice covers
+          the OSSFE 2027 website. If you have questions about it, or want to
+          exercise any of the rights described below, contact us at
+          <a
+            href={`mailto:${contact}`}
+            class="text-accent underline underline-offset-2 hover:text-accent-hover"
+            >{contact}</a
+          >.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="font-display text-2xl text-accent">
+          What we collect and why
+        </h2>
+        <p class="mt-4 font-body text-ink-muted">
+          <strong class="text-ink">Analytics.</strong> With your consent, we use
+          Google Analytics to understand how visitors use this site (for example,
+          which pages are viewed and roughly where visitors are located). This
+          helps us improve the site and plan the event. Google Analytics sets
+          cookies and processes information such as your IP address and browser.
+          We do not load Google Analytics, and no analytics cookies are set,
+          unless you click "Accept" on the cookie banner. You can change or
+          withdraw your choice at any time using the "Cookie settings" link in
+          the footer.
+        </p>
+        <p class="mt-4 font-body text-ink-muted">
+          <strong class="text-ink">Registration.</strong> Conference
+          registration is handled by Pretix, a ticketing platform operated by
+          rami.io GmbH. When you register, the information you provide (such as
+          your name, email address and any details required for your ticket) is
+          collected and processed through Pretix on our behalf. Please see the
+          <a
+            href="https://pretix.eu/about/en/privacy"
+            target="_blank"
+            rel="noopener"
+            class="text-accent underline underline-offset-2 hover:text-accent-hover"
+            >Pretix privacy policy</a
+          > for details of how that data is handled.
+        </p>
+        <p class="mt-4 font-body text-ink-muted">
+          <strong class="text-ink">Correspondence.</strong> If you email us (for
+          example at our contact or sponsorship addresses), we receive your email
+          address and the contents of your message, and keep them so we can
+          respond and follow up.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="font-display text-2xl text-accent">Who we share it with</h2>
+        <p class="mt-4 font-body text-ink-muted">
+          We do not sell your personal data. We share it only with the service
+          providers that help us run the event and this site:
+        </p>
+        <ul class="mt-4 space-y-2">
+          {
+            [
+              "Google, which provides Google Analytics (only if you consent to analytics cookies).",
+              "Pretix (rami.io GmbH), which provides conference registration and ticketing.",
+              "GitHub, which hosts this website via GitHub Pages and processes standard server request logs.",
+            ].map((item) => (
+              <li class="flex items-start gap-3 font-body text-ink-muted">
+                <span class="mt-1 text-accent">▸</span>
+                <span>{item}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="font-display text-2xl text-accent">Cookies</h2>
+        <p class="mt-4 font-body text-ink-muted">
+          This site does not set analytics or advertising cookies unless you
+          accept them. If you accept, Google Analytics sets cookies to measure
+          site usage. We also store your consent choice in your browser's local
+          storage so we do not ask you again on every visit. You can revisit or
+          reverse your choice through the "Cookie settings" link in the footer,
+          or by clearing this site's data in your browser.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="font-display text-2xl text-accent">How long we keep it</h2>
+        <p class="mt-4 font-body text-ink-muted">
+          We keep personal data only as long as needed for the purposes above:
+          registration data for as long as necessary to run the event and meet
+          our record-keeping obligations, correspondence for as long as needed to
+          handle your enquiry, and analytics data according to Google Analytics'
+          retention settings.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="font-display text-2xl text-accent">Your rights</h2>
+        <p class="mt-4 font-body text-ink-muted">
+          Depending on where you live, you may have the right to access,
+          correct, or delete the personal data we hold about you, to object to
+          or restrict certain processing, to withdraw consent, and to request a
+          copy of your data. To make a request, email us at
+          <a
+            href={`mailto:${contact}`}
+            class="text-accent underline underline-offset-2 hover:text-accent-hover"
+            >{contact}</a
+          >. If you are in the EU or UK and believe we have not handled your data
+          properly, you also have the right to complain to your local data
+          protection authority.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="font-display text-2xl text-accent">Changes to this notice</h2>
+        <p class="mt-4 font-body text-ink-muted">
+          We may update this notice as the conference and this site evolve. When
+          we do, we will revise the "last updated" date at the top of this page.
+        </p>
+      </section>
+
+      <div
+        class="rounded-2xl bg-ossfe-blue/60 p-8 text-center ring-1 ring-white/5"
+      >
+        <p class="font-body text-ink-muted">
+          Questions about your data or this notice?
+        </p>
+        <a
+          href={`mailto:${contact}`}
+          class="mt-4 inline-block rounded-full bg-accent px-8 py-3 font-semibold text-ossfe-darker transition hover:bg-accent-hover"
+        >
+          {contact}
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Base>
