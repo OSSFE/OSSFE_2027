@@ -9,7 +9,7 @@ const infoCards = [
 const base = import.meta.env.BASE_URL;
 ---
 
-<section id="travel" class="bg-ossfe-dark py-24">
+<section id="travel" class="bg-ossfe-blue py-24">
   <div class="mx-auto max-w-6xl px-6">
 
     <div class="grid items-center gap-12 lg:grid-cols-2">
@@ -25,7 +25,7 @@ const base = import.meta.env.BASE_URL;
 
         <div class="mt-10 grid gap-4 sm:grid-cols-2">
           {infoCards.map((c) => (
-            <div class="rounded-2xl bg-ossfe-blue/60 p-5 ring-1 ring-white/5">
+            <div class="rounded-2xl bg-ossfe-dark/60 p-5 ring-1 ring-white/5">
               <div class="text-2xl">{c.icon}</div>
               <h3 class="mt-3 font-display text-lg text-ink">{c.title}</h3>
               <p class="mt-1 font-body text-sm text-ink-faint">{c.body}</p>

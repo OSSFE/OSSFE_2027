@@ -22,7 +22,7 @@ const stats = [
 const base = import.meta.env.BASE_URL;
 ---
 
-<section id="gallery" class="bg-ossfe-blue py-24">
+<section id="gallery" class="bg-ossfe-dark py-24">
   <div class="mx-auto max-w-6xl px-6">
 
     <div class="mx-auto max-w-2xl text-center">
@@ -62,7 +62,7 @@ const base = import.meta.env.BASE_URL;
       {/* RIGHT — 2x2 stats grid */}
       <div class="grid grid-cols-2 gap-4 sm:gap-6">
         {stats.map((s) => (
-          <div class="flex flex-col items-center justify-center rounded-2xl bg-ossfe-dark/60 p-8 text-center ring-1 ring-white/5 transition hover:ring-accent/40">
+          <div class="flex flex-col items-center justify-center rounded-2xl bg-ossfe-blue/60 p-8 text-center ring-1 ring-white/5 transition hover:ring-accent/40">
             <div class="font-display text-4xl text-accent md:text-5xl">{s.value}</div>
             <div class="mt-2 font-body text-sm text-ink-faint">{s.label}</div>
           </div>
