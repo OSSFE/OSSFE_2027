@@ -24,6 +24,9 @@ jobs:
 
       - name: Build sponsor prospectus PDF
         run: npm run prospectus
+      
+      - name: Build CFP flyer
+        run: npm run cfp-prospectus
 
       - uses: withastro/action@v3
         with:
