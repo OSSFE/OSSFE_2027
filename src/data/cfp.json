@@ -1,0 +1,53 @@
+{
+  "meta": {
+    "event": "OSSFE 2027",
+    "location": "Madison, WI, US",
+    "dates": "June 1-4, 2027",
+    "organiser": "Organised with the MIT Plasma Science and Fusion Center",
+    "cfpUrl": "pretalx.com/ossfe2027/cfp",
+    "contact": "program@ossfe.org",
+    "pdf": "cfp-prospectus.pdf"
+  },
+  "cfpDates": {
+    "opens": "August 24, 2026",
+    "closes": "November 11, 2026",
+    "notified": "March 2027"
+  },
+  "programmeNote": "June 1-3 is three full days of talks and tutorials, plus an optional fourth day of lab tours (to be confirmed).",
+  "tracks": [
+    "Software engineering & infrastructure",
+    "Community, governance & sustainability",
+    "Engineering & applied physics",
+    "Machine learning & AI in fusion",
+    "Plasma physics",
+    "Neutronics",
+    "System modelling",
+    "Diagnostics"
+  ],
+  "formats": [
+    {
+      "name": "Hands-on tutorials",
+      "desc": "OSSFE's signature format: get a room up and running with your software, live.",
+      "signature": true
+    },
+    {
+      "name": "Talks",
+      "desc": "Present a tool, a result, or a lesson to the full track audience."
+    },
+    {
+      "name": "Lightning talks",
+      "desc": "Five minutes to put a project or idea on everyone's radar."
+    },
+    {
+      "name": "Posters",
+      "desc": "Discuss work in progress over a coffee break, no slides needed."
+    }
+  ],
+  "timeline": [
+    { "date": "Aug 24, 2026", "label": "CFP opens", "highlight": true },
+    { "date": "Nov 11, 2026", "label": "CFP closes", "highlight": true },
+    { "date": "Mar 2027", "label": "Speakers notified" },
+    { "date": "Apr 2027", "label": "Program published" },
+    { "date": "Jun 1-4, 2027", "label": "OSSFE 2027, Madison" }
+  ]
+}
