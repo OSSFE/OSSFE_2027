@@ -68,12 +68,12 @@
 
 // track card (the centerpiece grid)
 #let trackcard(i, name) = box(
-  fill: dark, radius: 8pt, inset: (x: 11pt, y: 9pt), width: 100%, height: 100%,
+  fill: dark, radius: 8pt, inset: (x: 12pt, y: 11pt), width: 100%, height: 100%,
   stroke: (left: 2.5pt + accent),
 )[
   #text(fill: accent, size: 7.5pt, weight: "bold")[#if i < 9 { "0" }#(i + 1)]
-  #v(2pt)
-  #text(fill: ink, size: 9pt, weight: "bold")[#name]
+  #v(4pt)
+  #text(fill: ink, size: 8pt, weight: "bold")[#name]
 ]
 
 // ════════════════════════ HEADER ════════════════════════
@@ -84,7 +84,7 @@
 #v(0.1cm)  // sit the headline lower over the photo
 // explicit `below` spacing so the intro sits tight under the title (otherwise
 // Typst's paragraph spacing scales to the 44pt headline and leaves a big gap)
-#block(below: 9pt, text(fill: ink, size: 44pt, weight: "bold")[Speak at \ #meta.event])
+#block(below: 15pt, text(fill: ink, size: 44pt, weight: "bold")[Speak at \ #meta.event])
 // spell the acronym out for newcomers; runs the full page width
 #text(fill: muted, size: 10pt)[
   #text(fill: ink, weight: "semibold")[Open Source Software for Fusion Energy.]
@@ -126,7 +126,7 @@
 #v(8pt)
 // both rows share one height so every card matches (the tallest is the 3-line
 // track 02, "Community, governance & sustainability")
-#grid(columns: (1fr, 1fr, 1fr, 1fr), gutter: 8pt, rows: (1.95cm, 1.95cm),
+#grid(columns: (1fr, 1fr, 1fr, 1fr), gutter: 10pt, rows: (2.15cm, 2.15cm),
   ..cfp.tracks.enumerate().map(((i, name)) => trackcard(i, name)))
 
 #v(7pt)
@@ -165,8 +165,8 @@
             fill: if "highlight" in m { accent } else { none },
             stroke: if "highlight" in m { none } else { 1pt + hair }))
           #if i < cfp.timeline.len() - 1 {
-            place(top + left, dx: 3.5pt, dy: 8pt,
-              line(angle: 90deg, length: 11pt, stroke: (paint: faint, thickness: 1pt, dash: "dotted")))
+            place(top + left, dx: 3.5pt, dy: 11pt,
+              line(angle: 90deg, length: 7pt, stroke: (paint: faint, thickness: 1pt, dash: "dotted")))
           }
         ],
         text(fill: if "highlight" in m { ink } else { muted },
@@ -213,16 +213,15 @@
           ]))
       ]
     ]
+    // grants note — under the stats box but outside it, in the right column
+    #v(10pt)
+    #grid(columns: (auto, 1fr), column-gutter: 8pt, align: horizon,
+      text(fill: accent, size: 9.5pt)[▪],
+      text(fill: ink, size: 9pt, weight: "bold")[Student travel grants and childcare support available.])
   ],
 )
 
-// grants note — pulled out of the stats box to span the full width
 #v(7pt)
-#grid(columns: (auto, 1fr), column-gutter: 8pt, align: horizon,
-  text(fill: accent, size: 9.5pt)[▪],
-  text(fill: ink, size: 9pt, weight: "bold")[Student travel grants and childcare support available.])
-
-#v(5pt)
 // ════════════════════════ CTA BAND ════════════════════════
 #box(fill: accent, radius: 12pt, inset: (x: 16pt, y: 11pt), width: 100%)[
   #grid(columns: (1fr, auto), align: horizon, column-gutter: 12pt,
