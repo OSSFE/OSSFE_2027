@@ -81,15 +81,14 @@
 // flow, so enlarging it does not add header height or push content to a 2nd page.
 #place(top + right, dy: -2pt, image("../public/images/ossfe light transparent.svg", width: 4cm))
 #eyebrow("Call for Proposals")
-#v(0.2cm)  // sit the headline lower over the photo
+#v(0.1cm)  // sit the headline lower over the photo
 // explicit `below` spacing so the intro sits tight under the title (otherwise
 // Typst's paragraph spacing scales to the 44pt headline and leaves a big gap)
-#block(below: 10pt, text(fill: ink, size: 44pt, weight: "bold")[Speak at \ #meta.event])
-#box(width: 62%)[
-  #text(fill: muted, size: 9.5pt)[
-    Three full days of talks and hands-on tutorials for the open-source software
-    powering fusion energy. Bring a tool, a result, or a lesson to Madison.
-  ]
+#block(below: 9pt, text(fill: ink, size: 44pt, weight: "bold")[Speak at \ #meta.event])
+// spell the acronym out for newcomers; runs the full page width
+#text(fill: muted, size: 10pt)[
+  #text(fill: ink, weight: "semibold")[Open Source Software for Fusion Energy.]
+  Talks and hands-on tutorials for the tools powering fusion. Bring a tool, a result, or a lesson to Madison.
 ]
 #v(7pt)
 
@@ -111,23 +110,23 @@
     ]
   ],
 )
-#v(7pt)
+#v(6pt)
 
 // programme note (subtle, left accent rule)
 #block(inset: (left: 10pt), stroke: (left: 2pt + accent))[
   #text(fill: ink, size: 8pt, weight: "bold")[Programme.  ]
   #text(fill: muted, size: 8pt)[#cfp.programmeNote]
 ]
-#v(7pt)
+#v(6pt)
 
 // ════════════════════════ TRACKS (centerpiece) ════════════════════════
 #grid(columns: (auto, 1fr), align: horizon, column-gutter: 8pt,
   hd[Submit to one of eight tracks],
   text(fill: faint, size: 8pt)[ Pick the track that fits your work, or propose something new.])
 #v(8pt)
-// first row is tall enough for the 3-line track 02 ("Community, governance &
-// sustainability"); second row holds single-line names
-#grid(columns: (1fr, 1fr, 1fr, 1fr), gutter: 8pt, rows: (1.95cm, 1.35cm),
+// both rows share one height so every card matches (the tallest is the 3-line
+// track 02, "Community, governance & sustainability")
+#grid(columns: (1fr, 1fr, 1fr, 1fr), gutter: 8pt, rows: (1.95cm, 1.95cm),
   ..cfp.tracks.enumerate().map(((i, name)) => trackcard(i, name)))
 
 #v(7pt)
@@ -159,14 +158,22 @@
     #v(6pt)
     #for (i, m) in cfp.timeline.enumerate() [
       #grid(columns: (auto, 1fr, auto), column-gutter: 8pt, align: horizon,
-        circle(radius: 4pt,
-          fill: if "highlight" in m { accent } else { none },
-          stroke: if "highlight" in m { none } else { 1pt + hair }),
+        // bullet, with a dashed connector *placed* below it (placed => adds no
+        // layout height) so the dates stay tightly stacked
+        box(width: 8pt, height: 8pt)[
+          #place(center + horizon, circle(radius: 4pt,
+            fill: if "highlight" in m { accent } else { none },
+            stroke: if "highlight" in m { none } else { 1pt + hair }))
+          #if i < cfp.timeline.len() - 1 {
+            place(top + left, dx: 3.5pt, dy: 8pt,
+              line(angle: 90deg, length: 11pt, stroke: (paint: faint, thickness: 1pt, dash: "dotted")))
+          }
+        ],
         text(fill: if "highlight" in m { ink } else { muted },
           size: 8.5pt, weight: if "highlight" in m { "semibold" } else { "regular" })[#m.label],
         text(fill: if "highlight" in m { accent } else { faint }, size: 8pt, weight: "bold")[#m.date],
       )
-      #if i < cfp.timeline.len() - 1 { v(4pt) }
+      #if i < cfp.timeline.len() - 1 { v(5pt) }
     ]
   ],
 
@@ -205,16 +212,17 @@
             }]
           ]))
       ]
-      // grants note — directly under the bar (hairline separator, no big gap)
-      #v(11pt)
-      #line(length: 100%, stroke: 0.6pt + hair)
-      #v(10pt)
-      #text(fill: ink, size: 8.5pt, weight: "bold")[Student travel grants and childcare support available.]
     ]
   ],
 )
 
+// grants note — pulled out of the stats box to span the full width
 #v(7pt)
+#grid(columns: (auto, 1fr), column-gutter: 8pt, align: horizon,
+  text(fill: accent, size: 9.5pt)[▪],
+  text(fill: ink, size: 9pt, weight: "bold")[Student travel grants and childcare support available.])
+
+#v(5pt)
 // ════════════════════════ CTA BAND ════════════════════════
 #box(fill: accent, radius: 12pt, inset: (x: 16pt, y: 11pt), width: 100%)[
   #grid(columns: (1fr, auto), align: horizon, column-gutter: 12pt,
