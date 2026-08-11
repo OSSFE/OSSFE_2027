@@ -1,10 +1,12 @@
 ---
 // src/components/Timeline.astro
+const base = import.meta.env.BASE_URL;
+
 // status: 'done' | 'next' | 'upcoming' | 'tba'
 const milestones = [
   { date: 'Aug 24, 2026',        label: 'CFP opens',            status: 'next' },
   { date: 'Nov 11, 2026',        label: 'CFP closes',           status: 'upcoming' },
-  { date: 'Dec 2026',    label: 'Early-bird tickets',   status: 'tba' },
+  { date: 'Dec 17, 2026',    label: 'Early-bird tickets',   status: 'tba' },
   { date: 'Mar 2027',    label: 'Speakers notified',    status: 'tba' },
   { date: 'Apr 2027',    label: 'Program published',    status: 'tba' },
   { date: 'Jun 1–4, 2027',    label: 'OSSFE 2027 · Madison', status: 'tba' },
@@ -61,12 +63,25 @@ const dotClass = {
     </ol>
 
     <!-- CTA -->
-    <div class="mt-16 text-center">
+    <div class="mt-16 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
       <a href="#newsletter"
          class="rounded-full bg-accent px-8 py-3 font-body font-semibold text-ossfe-darker transition hover:bg-accent-hover">
         Notify me when the CFP opens
       </a>
+      <a href={`${base}ossfe-2027.ics`}
+         download="ossfe-2027.ics"
+         class="inline-flex items-center gap-2 rounded-full border border-ink/30 px-8 py-3 font-body font-semibold text-ink transition hover:border-ink hover:bg-ink/10">
+        <svg aria-hidden="true" class="h-5 w-5" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="4.5" width="18" height="16.5" rx="2.5"></rect>
+          <path d="M3 9.75h18M8 3v3M16 3v3"></path>
+        </svg>
+        Add to calendar
+      </a>
     </div>
+    <p class="mt-4 text-center font-body text-sm text-ink-faint">
+      Includes the conference, both CFP deadlines and the early-bird cutoff.
+    </p>
 
   </div>
 </section>

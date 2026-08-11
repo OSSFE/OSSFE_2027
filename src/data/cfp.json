@@ -13,6 +13,15 @@
     "closes": "November 11, 2026",
     "notified": "March 2027"
   },
+  "calendar": {
+    "start": "2027-06-01",
+    "end": "2027-06-04",
+    "cfpOpens": "2026-08-24",
+    "cfpCloses": "2026-11-11",
+    "earlyBirdOpens": "2026-12-17",
+    "earlyBirdEnds": "2027-02-23",
+    "locationFull": "Madison, Wisconsin, USA"
+  },
   "programmeNote": "June 1-3 is three full days of talks and tutorials, followed by an optional fourth day of lab tours on June 4.",
   "tracks": [
     "Software engineering & infrastructure",
