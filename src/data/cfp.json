@@ -11,7 +11,7 @@
   "cfpDates": {
     "opens": "August 24, 2026",
     "closes": "November 11, 2026",
-    "notified": "March 2027"
+    "notified": "December 16, 2026"
   },
   "calendar": {
     "start": "2027-06-01",
@@ -55,8 +55,8 @@
   "timeline": [
     { "date": "Aug 24, 2026", "label": "CFP opens", "highlight": true },
     { "date": "Nov 11, 2026", "label": "CFP closes", "highlight": true },
-    { "date": "Mar 2027", "label": "Speakers notified" },
-    { "date": "Apr 2027", "label": "Program published" },
+    { "date": "Dec 16, 2026", "label": "Speakers notified" },
+    { "date": "Jan 22, 2027", "label": "Program published" },
     { "date": "Jun 1-4, 2027", "label": "OSSFE 2027, Madison" }
   ]
 }
