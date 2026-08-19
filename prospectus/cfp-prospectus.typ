@@ -144,14 +144,14 @@
     #text(fill: faint, size: 8pt)[#sig.desc]
     #v(7pt)
     #text(fill: accent, size: 9.5pt)[▪] #h(4pt)
-    #text(fill: ink, size: 9.5pt, weight: "bold")[#{ rest.map(f => f.name).join("  ·  ") }  ·  More]
+    #text(fill: ink, size: 9.5pt, weight: "bold")[#{ rest.map(f => f.name).join("  ·  ") }]
     #v(1pt)
-    #text(fill: faint, size: 8pt)[Short, informal or in-depth: quick ways to share work and spark collaboration, whatever your experience level.]
+    #text(fill: faint, size: 8pt)[Short, informal or in-depth ways to share work and spark collaboration.]
     #v(6pt)
     #text(fill: muted, size: 8pt)[Not a maintainer? #text(weight: "bold")[Users] of open-source tools are just as welcome as the people who build them.]
 
     // key dates — sits directly under the copy (hairline separator, no big gap)
-    #v(11pt)
+    #v(6pt)
     #line(length: 100%, stroke: 0.6pt + hair)
     #v(9pt)
     #eyebrow("Key dates")
@@ -221,14 +221,14 @@
   ],
 )
 
-#v(7pt)
+#v(4pt)
 // ════════════════════════ CTA BAND ════════════════════════
 #box(fill: accent, radius: 12pt, inset: (x: 16pt, y: 11pt), width: 100%)[
   #grid(columns: (1fr, auto), align: horizon, column-gutter: 12pt,
     [
       #text(fill: darker, size: 13pt, weight: "bold")[Got something to share? Submit your proposal.]
       #v(2pt)
-      #text(fill: darker, size: 9pt)[Tutorials, talks, lightning talks and posters. Deadline #cfp.cfpDates.closes. Questions? #link("mailto:" + meta.contact)[#meta.contact]]
+      #text(fill: darker, size: 9pt)[Tutorials, talks, posters, Birds of a Feather and Meet the Maintainer. Deadline #cfp.cfpDates.closes. Questions? #link("mailto:" + meta.contact)[#meta.contact]]
     ],
     link("https://" + meta.cfpUrl, box(fill: darker, radius: 20pt, inset: (x: 14pt, y: 9pt))[
       #text(fill: accent, size: 11pt, weight: "bold")[#meta.cfpUrl]

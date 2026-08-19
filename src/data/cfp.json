@@ -36,20 +36,34 @@
   "formats": [
     {
       "name": "Hands-on tutorials",
+      "icon": "wrench",
       "desc": "OSSFE's signature format: get a room up and running with your software, live.",
       "signature": true
     },
     {
       "name": "Talks",
+      "icon": "mic",
       "desc": "Present a tool, a result, or a lesson to the full track audience."
     },
     {
-      "name": "Lightning talks",
-      "desc": "Five minutes to put a project or idea on everyone's radar."
+      "name": "Posters",
+      "icon": "chart",
+      "desc": "Discuss work in progress over a coffee break, no slides needed."
     },
     {
-      "name": "Posters",
-      "desc": "Discuss work in progress over a coffee break, no slides needed."
+      "name": "Lightning talks",
+      "icon": "zap",
+      "desc": "A few minutes to highlight your poster!"
+    },
+    {
+      "name": "Birds of a Feather",
+      "icon": "messages",
+      "desc": "Propose a topic and host an open discussion with whoever shows up."
+    },
+    {
+      "name": "Meet the Maintainer",
+      "icon": "coffee",
+      "desc": "Make yourself available so users can bring you their questions, bugs and ideas."
     }
   ],
   "timeline": [
