@@ -49,7 +49,7 @@ type-check `.astro`/`.ts` files against `tsconfig.json` (extends
   component list in `src/pages/index.astro` rather than the components
   themselves.
 - `src/layouts/Base.astro` — shared HTML shell (head/meta/OG tags, global CSS
-  import, `CountdownOverlay`, `ConsentBanner`). Every page wraps its content
+  import, `ConsentBanner`). Every page wraps its content
   in `<Base>`.
 - `src/components/ConsentBanner.astro` — Google Analytics with Consent Mode v2.
   GA loads on every page, but all consent signals default to "denied", so until
@@ -59,8 +59,10 @@ type-check `.astro`/`.ts` files against `tsconfig.json` (extends
   `localStorage`. `window.ossfeCookieSettings()` reopens the banner to change or
   withdraw consent (wired to the footer's "Cookie settings" button).
 - `src/components/CountdownOverlay.astro` — full-screen overlay with its own
-  client-side timer that hides the site until a `revealDate` passes (used in
-  `Base.astro` to hide the 2027 event location until it's announced). Preview
+  client-side timer that hides the site until a `revealDate` passes. Currently
+  unused (it hid the 2027 location until the July 2026 announcement); to reuse
+  it, uncomment the import and `<CountdownOverlay>` line in `Base.astro` and
+  set a new `revealDate`. Preview
   backdoor: visiting any page with `?preview=fusion` unlocks the site for devs
   or invited sponsors and remembers it in `localStorage` (use `?preview=off` to
   re-lock). This is obfuscation, not real security: the token ships in the

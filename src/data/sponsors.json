@@ -177,6 +177,18 @@
       "source": "2026 attendee feedback"
     }
   ],
+  "currentSponsors": [
+    {
+      "name": "Kitware",
+      "logo": "images/sponsors/kitware.png",
+      "url": "https://www.kitware.com"
+    },
+    {
+      "name": "Type One Energy",
+      "logo": "images/sponsors/type-one-energy-stacked.png",
+      "url": "https://www.typeoneenergy.com"
+    }
+  ],
   "previousSponsors": [
     {
       "name": "Proxima Fusion",

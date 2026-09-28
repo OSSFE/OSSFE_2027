@@ -21,6 +21,11 @@ const {
   prizeNote,
   faqs,
 } = data;
+const currentSponsors = data.currentSponsors as {
+  name: string;
+  logo: string;
+  url: string;
+}[];
 const previousSponsors = data.previousSponsors as {
   name: string;
   logo: string;
@@ -296,6 +301,29 @@ const pctOf = (n: number) => Math.round((n / audTotal) * 100);
       <div class="mt-6 h-[26rem]"><canvas id="countriesMap"></canvas></div>
     </div>
   </section>
+
+  {
+    currentSponsors.length > 0 && (
+      <section class="bg-ossfe-dark pt-16">
+        <div class="mx-auto max-w-5xl px-6 text-center">
+          <h2 class="font-display text-3xl text-ink">
+            Thank you to our 2027 sponsors
+          </h2>
+          <div class="mt-10 flex flex-wrap items-center justify-center gap-x-16 gap-y-10">
+            {currentSponsors.map((s) => (
+              <a href={s.url} target="_blank" rel="noopener" title={s.name}>
+                <img
+                  src={`${base}${s.logo}`}
+                  alt={s.name}
+                  class="h-14 opacity-90 brightness-0 invert transition hover:opacity-100 hover:brightness-100 hover:invert-0"
+                />
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
 
   {
     previousSponsors.length > 0 && (
