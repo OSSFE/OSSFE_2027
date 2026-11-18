@@ -3,7 +3,10 @@ import '../styles/global.css';
 import ConsentBanner from '../components/ConsentBanner.astro';
 // Uncomment (with the <CountdownOverlay> below) to hide the site until a reveal date.
 // import CountdownOverlay from '../components/CountdownOverlay.astro';
-const { title = 'OSSFE 2027 — Open Source Software for Fusion Energy' } = Astro.props;
+const {
+  title = 'OSSFE 2027: Open Source Software for Fusion Energy',
+  description = 'OSSFE 2027: the conference for open-source software in fusion energy. Location to be announced.',
+} = Astro.props;
 const base = import.meta.env.BASE_URL;
 
 ---
@@ -13,10 +16,10 @@ const base = import.meta.env.BASE_URL;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
-    <meta name="description" content="OSSFE 2027 — the conference for open-source software in fusion energy. Location to be announced." />
+    <meta name="description" content={description} />
     <!-- Open Graph / social cards -->
     <meta property="og:title" content={title} />
-    <meta property="og:description" content="OSSFE 2027 — the conference for open-source software in fusion energy. Location to be announced." />
+    <meta property="og:description" content={description} />
     <meta property="og:image" content={new URL(`${base}media/hero-poster.jpg`, Astro.site)} />
     <link rel="icon" href={`${base}favicon.svg?v=3`} type="image/svg+xml" />
   </head>
