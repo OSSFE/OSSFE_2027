@@ -1,0 +1,187 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import Icon from '../components/Icon.astro';
+
+const base = import.meta.env.BASE_URL;
+
+// Conference booking links and contact details come from Hotel Information.md.
+// Official hotel websites were checked against the properties' own listings.
+const hotels = [
+  {
+    name: 'Hampton Inn & Suites Madison / Downtown',
+    location: 'Downtown Madison',
+    address: '440 W Johnson St, Madison, WI 53703',
+    phone: '+1 (608) 255-0360',
+    telephone: '+16082550360',
+    booking: 'https://www.hilton.com/en/attend-my-event/open-source-software-for-fusion-energy',
+    website: 'https://www.hilton.com/en/hotels/msnbjhx-hampton-suites-madison-downtown/',
+    map: 'https://maps.app.goo.gl/qUVrT48Y5RDRa5U97',
+  },
+  {
+    name: 'Wisconsin Union Hotel',
+    location: 'Union South, UW-Madison campus',
+    address: '1308 W Dayton St, Madison, WI 53715',
+    phone: '+1 (608) 263-2600',
+    telephone: '+16082632600',
+    booking: 'https://go.wisc.edu/hotel-ossfusion27',
+    website: 'https://union.wisc.edu/visit/stay-at-the-union/hotel-at-union-south',
+    map: 'https://maps.app.goo.gl/MwzRdyqg4pK1NLFTA',
+  },
+  {
+    name: 'DoubleTree by Hilton Madison Downtown',
+    location: 'Downtown Madison',
+    address: '525 W Johnson St, Madison, WI 53703',
+    phone: '+1 (608) 251-5511',
+    telephone: '+16082515511',
+    booking: 'https://www.hilton.com/en/attend-my-event/msndtdt-sfe-be870b08-8c08-4bc3-8690-e732c062d553/',
+    website: 'https://www.hilton.com/en/hotels/msndtdt-doubletree-madison-downtown/',
+    map: 'https://maps.app.goo.gl/znGvSh3vsuZeg2pj9',
+  },
+];
+
+// Pickup details: https://www.msnairport.com/parking_transportation/ground_transportation
+const transportation = [
+  {
+    title: 'Taxis & rideshare',
+    body: 'Find taxis at Door 7, at the north end of baggage claim. Uber and Lyft pick up outside Door 6, to the right along the terminal curb.',
+  },
+  {
+    title: 'Madison Metro bus',
+    body: 'Route D2 connects the airport with downtown and the UW campus. Board at the median stop outside Door 6. Check the current timetable for your arrival.',
+  },
+  {
+    title: 'Rental cars',
+    body: 'Rental counters are in baggage claim, with the rental car lot outside Door 6.',
+  },
+  {
+    title: 'Hotel shuttles',
+    body: 'Ask your hotel about shuttle availability and reservations. Hotel and courtesy vans pick up at the median shelter outside Door 5.',
+  },
+];
+
+const textLink = 'text-accent underline decoration-accent/40 underline-offset-4 transition hover:text-accent-hover focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent';
+const primaryLink = 'inline-flex items-center justify-center rounded-full bg-accent px-6 py-3 font-semibold text-ossfe-darker transition hover:bg-accent-hover focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent';
+---
+
+<Base
+  title="Plan your trip · OSSFE 2027"
+  description="Plan your visit to Madison for OSSFE 2027. Find conference hotel booking links, addresses and phone numbers, plus MSN airport transportation details."
+>
+  <Nav />
+
+  <main>
+    <header class="bg-ossfe-blue pt-32 pb-16">
+      <div class="mx-auto grid max-w-6xl items-center gap-10 px-6 lg:grid-cols-2">
+        <div>
+          <p class="font-body text-sm uppercase tracking-widest text-accent">Travel & lodging</p>
+          <h1 class="mt-3 font-display text-5xl text-ink md:text-6xl">Plan your trip</h1>
+          <p class="mt-6 max-w-xl font-body text-lg text-ink-muted">
+            See you in Madison, Wisconsin. Find your conference hotel and plan
+            your arrival for OSSFE 2027.
+          </p>
+          <div class="mt-8 flex flex-wrap gap-4">
+            <a href="#hotels" class={primaryLink}>Find a hotel</a>
+            <a href="#airport" class="inline-flex items-center justify-center rounded-full px-6 py-3 font-semibold text-ink ring-1 ring-white/20 transition hover:bg-ossfe-dark focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent">Getting to Madison</a>
+          </div>
+        </div>
+        <div class="relative aspect-[4/3] overflow-hidden rounded-2xl ring-1 ring-white/10">
+          <img
+            src={`${base}images/madison.jpg`}
+            alt="Madison, Wisconsin"
+            class="h-full w-full object-cover"
+          />
+          <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-ossfe-darker/70 via-transparent to-transparent"></div>
+          <span class="absolute bottom-4 left-5 font-display text-xl text-ink drop-shadow">Your stay in Madison</span>
+        </div>
+      </div>
+    </header>
+
+    <section id="hotels" aria-labelledby="hotels-heading" class="scroll-mt-24 bg-ossfe-dark py-20">
+      <div class="mx-auto max-w-6xl px-6">
+        <Icon name="bed" class="h-8 w-8 text-accent" />
+        <p class="mt-4 font-body text-sm uppercase tracking-widest text-accent">Stay in Madison</p>
+        <h2 id="hotels-heading" class="mt-3 font-display text-4xl text-ink md:text-5xl">Hotels & lodging</h2>
+        <p class="mt-5 max-w-2xl font-body text-lg text-ink-muted">
+          Use the conference booking links below to reserve your stay.
+          Check your selected hotel's booking page for available dates, rates and reservation terms.
+        </p>
+
+        <div class="mt-10 overflow-hidden rounded-2xl ring-1 ring-white/10">
+          <iframe
+            src="https://www.google.com/maps/d/embed?mid=1YAmd2vuVZuiaMJSPkhqLtZhkphL50zI&ehbc=2E312F&noprof=1"
+            title="OSSFE 2027 hotels and locations in Madison"
+            width="640"
+            height="480"
+            loading="lazy"
+            class="block h-[360px] w-full border-0 sm:h-[480px]"
+          ></iframe>
+        </div>
+
+        <div class="mt-10 grid gap-6 lg:grid-cols-3 lg:gap-y-0">
+          {hotels.map((hotel) => (
+            <article class="flex flex-col rounded-2xl bg-ossfe-blue p-6 ring-1 ring-white/10 md:p-8 lg:row-span-4 lg:grid lg:grid-rows-subgrid">
+              <p class="font-body text-sm text-accent">{hotel.location}</p>
+              <h3 class="mt-3 font-display text-2xl leading-tight text-ink">{hotel.name}</h3>
+              <address class="mt-6 space-y-3 font-body leading-relaxed not-italic text-ink-muted">
+                <p><a href={hotel.map} class={textLink} aria-label={`${hotel.address} on Google Maps`}>{hotel.address}</a></p>
+              </address>
+              <div class="pt-5">
+                <div class="mb-6 flex items-center justify-between gap-2 font-body text-sm">
+                  <a href={hotel.website} class={`${textLink} whitespace-nowrap`} aria-label={`${hotel.name} official website`}>Hotel Website</a>
+                  <a href={`tel:${hotel.telephone}`} class={`${textLink} whitespace-nowrap`} aria-label={`Call ${hotel.name} at ${hotel.phone}`}>{hotel.phone}</a>
+                </div>
+                <a href={hotel.booking} class={`${primaryLink} w-full text-center`} aria-label={`Book ${hotel.name} for OSSFE 2027`}>Conference booking</a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="airport" aria-labelledby="airport-heading" class="scroll-mt-24 bg-ossfe-blue py-20">
+      <div class="mx-auto max-w-6xl px-6">
+        <Icon name="plane" class="h-8 w-8 text-accent" />
+        <p class="mt-4 font-body text-sm uppercase tracking-widest text-accent">Arriving by air</p>
+        <h2 id="airport-heading" class="mt-3 font-display text-4xl text-ink md:text-5xl">Madison airport (MSN)</h2>
+        <p class="mt-5 max-w-2xl font-body text-lg text-ink-muted">
+          Dane County Regional Airport (MSN) serves Madison.
+          From the terminal, continue to your hotel by bus, taxi, rideshare or rental car.
+        </p>
+        <address class="mt-4 font-body not-italic text-ink-muted">4000 International Lane, Madison, WI 53704</address>
+        <div class="mt-6 flex flex-wrap gap-x-6 gap-y-3 font-body">
+          <a href="https://www.msnairport.com/" class={textLink}>Airport website</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=Dane%20County%20Regional%20Airport%204000%20International%20Lane%20Madison%20WI%2053704" class={textLink}>Airport on Google Maps</a>
+        </div>
+
+        <h3 class="mt-12 font-display text-2xl text-ink">From the terminal to the city</h3>
+        <div class="mt-6 grid gap-5 md:grid-cols-2">
+          {transportation.map((option) => (
+            <div class="rounded-2xl bg-ossfe-dark/60 p-6 ring-1 ring-white/5">
+              <h4 class="font-display text-xl text-ink">{option.title}</h4>
+              <p class="mt-3 font-body leading-relaxed text-ink-muted">{option.body}</p>
+            </div>
+          ))}
+        </div>
+        <p class="mt-8 font-body leading-relaxed text-ink-muted">
+          Check the{' '}
+          <a href="https://www.msnairport.com/parking_transportation/ground_transportation" class={textLink}>airport's ground transportation guide</a>
+          {' '}and{' '}
+          <a href="https://www.cityofmadison.com/metro/routes-schedules/route-d" class={textLink}>Metro Route D2 schedule</a>
+          {' '}before you travel for current pickup locations and service details.
+        </p>
+      </div>
+    </section>
+
+    <section aria-labelledby="help-heading" class="bg-ossfe-dark py-16">
+      <div class="mx-auto max-w-3xl px-6 text-center">
+        <h2 id="help-heading" class="font-display text-3xl text-ink">Need a hand planning your visit?</h2>
+        <p class="mt-4 font-body text-lg text-ink-muted">Contact the OSSFE team with questions about attending.</p>
+        <a href="mailto:contact@ossfe.org" class={`${primaryLink} mt-6`}>Contact the organisers</a>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Base>
