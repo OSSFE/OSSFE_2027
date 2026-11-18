@@ -119,15 +119,15 @@ const primaryLink = 'inline-flex items-center justify-center rounded-full bg-acc
           ></iframe>
         </div>
 
-        <div class="mt-10 grid gap-6 lg:grid-cols-3">
+        <div class="mt-10 grid gap-6 lg:grid-cols-3 lg:gap-y-0">
           {hotels.map((hotel) => (
-            <article class="flex flex-col rounded-2xl bg-ossfe-blue p-6 ring-1 ring-white/10 md:p-8">
+            <article class="flex flex-col rounded-2xl bg-ossfe-blue p-6 ring-1 ring-white/10 md:p-8 lg:row-span-4 lg:grid lg:grid-rows-subgrid">
               <p class="font-body text-sm text-accent">{hotel.location}</p>
               <h3 class="mt-3 font-display text-2xl leading-tight text-ink">{hotel.name}</h3>
               <address class="mt-6 space-y-3 font-body leading-relaxed not-italic text-ink-muted">
                 <p><a href={hotel.map} class={textLink} aria-label={`${hotel.address} on Google Maps`}>{hotel.address}</a></p>
               </address>
-              <div class="mt-auto pt-5">
+              <div class="pt-5">
                 <div class="mb-6 flex items-center justify-between gap-2 font-body text-sm">
                   <a href={hotel.website} class={`${textLink} whitespace-nowrap`} aria-label={`${hotel.name} official website`}>Hotel Website</a>
                   <a href={`tel:${hotel.telephone}`} class={`${textLink} whitespace-nowrap`} aria-label={`Call ${hotel.name} at ${hotel.phone}`}>{hotel.phone}</a>
